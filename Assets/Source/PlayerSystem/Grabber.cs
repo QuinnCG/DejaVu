@@ -15,6 +15,8 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float VelocityDecayRate = 10f;
 
+		public bool IsGrabbing { get; private set; }
+
 		private Vector2 _grabPos, _desiredGrabPos;
 		private float _grabDst;
 
@@ -28,22 +30,7 @@ namespace Quinn.PlayerSystem
 
 		private void Update()
 		{
-			if (Input.GetMouseButtonDown(1))
-			{
-				_desiredGrabPos = GetCursorWorldPos();
-				_grabPos = GetGrabPoint(_desiredGrabPos);
-
-				if (transform.position.DistanceTo(_grabPos) <= GrabMaxDistance)
-				{
-					_grabSpring.connectedAnchor = _grabPos;
-
-					_grabDst = Mathf.Min(transform.position.DistanceTo(_grabPos) * GrabDistanceFactor, GrabMaxDistance);
-					_grabSpring.distance = _grabDst;
-				}
-
-				_cursorState.ForceShowCursor = false;
-			}
-			else if (Input.GetMouseButton(1))
+			if (IsGrabbing)
 			{
 				Debug.DrawLine(transform.position, _grabPos, Color.yellow);
 				Draw.Rect(_desiredGrabPos, Vector2.one * 0.25f, Color.red);
@@ -63,8 +50,35 @@ namespace Quinn.PlayerSystem
 					Draw.Sphere(transform.position, 1f, Color.red);
 				}
 			}
-			else if (Input.GetMouseButtonUp(1))
+		}
+
+		public void Grab()
+		{
+			if (!IsGrabbing)
 			{
+				IsGrabbing = true;
+
+				_desiredGrabPos = GetCursorWorldPos();
+				_grabPos = GetGrabPoint(_desiredGrabPos);
+
+				if (transform.position.DistanceTo(_grabPos) <= GrabMaxDistance)
+				{
+					_grabSpring.connectedAnchor = _grabPos;
+
+					_grabDst = Mathf.Min(transform.position.DistanceTo(_grabPos) * GrabDistanceFactor, GrabMaxDistance);
+					_grabSpring.distance = _grabDst;
+				}
+
+				_cursorState.ForceShowCursor = false;
+			}
+		}
+
+		public void Release()
+		{
+			if (IsGrabbing)
+			{
+				IsGrabbing = false;
+
 				_grabSpring.enabled = false;
 				_cursorState.ForceShowCursor = true;
 			}

@@ -10,10 +10,12 @@ namespace Quinn.PlayerSystem
 		private float DashForce = 12f;
 
 		private Rigidbody2D _rb;
+		private Grabber _grabber;
 
 		private void Awake()
 		{
 			_rb = GetComponent<Rigidbody2D>();
+			_grabber = GetComponent<Grabber>();
 		}
 
 		private void Update()
@@ -32,6 +34,15 @@ namespace Quinn.PlayerSystem
 				{
 					_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
 				});
+			}
+
+			if (Input.GetMouseButtonDown(1))
+			{
+				_grabber.Grab();
+			}
+			else if (Input.GetMouseButtonUp(1))
+			{
+				_grabber.Release();
 			}
 		}
 	}
