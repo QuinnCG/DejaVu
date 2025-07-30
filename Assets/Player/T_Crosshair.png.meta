@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 67707618df215f443a6059500440920d
+guid: 43e79db61eafffa47ae134ae22e28352
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4595868316485779318
-    second: T_Hand_0
+      213: 361223403529278948
+    second: T_Crosshair_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: T_Hand_0
+      name: T_Crosshair_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 148
-        height: 121
-      alignment: 9
-      pivot: {x: 0.5165919, y: 0.037037004}
+        width: 101
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a808469bd123830c0800000000000000
-      internalID: -4595868316485779318
+      spriteID: 4e59beb85c2530500800000000000000
+      internalID: 361223403529278948
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 65af803f4d6b3c14196495131d7bb413
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      T_Hand_0: -4595868316485779318
+      T_Crosshair_0: 361223403529278948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

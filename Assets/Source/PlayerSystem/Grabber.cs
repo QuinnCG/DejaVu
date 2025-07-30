@@ -44,7 +44,6 @@ namespace Quinn.PlayerSystem
 		private float _initGrabDst;
 
 		private GameObject _grabHand;
-		private CursorStateHandle _cursorState;
 
 		private float _nextAllowedGrabTime;
 		private float _grabStartTime;
@@ -52,7 +51,6 @@ namespace Quinn.PlayerSystem
 
 		private void Awake()
 		{
-			_cursorState = InputManager.Instance.GetCursorStateHandle();
 			_grabSpring = GetComponent<SpringJoint2D>();
 		}
 
@@ -134,7 +132,7 @@ namespace Quinn.PlayerSystem
 					_grabSpring.distance = _initGrabDst;
 				}
 
-				_cursorState.ForceShowCursor = false;
+				CrosshairManager.Instance.Hide();
 
 				_grabStartTime = Time.time;
 				_grabHand = Instantiate(HandPrefab, transform.position, GetHandRotation());
@@ -152,7 +150,7 @@ namespace Quinn.PlayerSystem
 				IsGrabbing = false;
 
 				_grabSpring.enabled = false;
-				_cursorState.ForceShowCursor = true;
+				CrosshairManager.Instance.Show();
 
 				Line.positionCount = 0;
 

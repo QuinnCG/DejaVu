@@ -12,12 +12,8 @@ namespace Quinn
 	{
 		public static TransitionManager Instance { get; private set; }
 
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		protected static void StaticReset()
-		{
-			Instance = null;
-		}
-
+		[SerializeField]
+		private bool StartBlack;
 		[SerializeField]
 		private CanvasGroup Blackout;
 
@@ -29,10 +25,16 @@ namespace Quinn
 		// This snapshot mutes most sound channels, but leaves music and reverb playing.
 		private EventInstance _transitionSnapshot;
 
-		private void Start()
+		private void Awake()
 		{
 			Instance = this;
 			_transitionSnapshot = RuntimeManager.CreateInstance("snapshot:/Transition");
+
+			if (StartBlack)
+			{
+				_transitionSnapshot.start();
+				Blackout.alpha = 1f;
+			}
 		}
 
 		private void OnDestroy()

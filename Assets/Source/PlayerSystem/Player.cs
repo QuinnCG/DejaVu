@@ -18,6 +18,11 @@ namespace Quinn.PlayerSystem
 			_grabber = GetComponent<Grabber>();
 		}
 
+		private async void Start()
+		{
+			await TransitionManager.Instance.FadeFromBlackAsync(1f);
+		}
+
 		private void Update()
 		{
 			Vector2 moveDir = new Vector2()
