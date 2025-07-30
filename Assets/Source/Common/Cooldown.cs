@@ -8,9 +8,6 @@ namespace Quinn
 	[InfoBox("Manages a convenient system for calling something on a cooldown when the input call may be occuring more frequently than desired.")]
 	public class Cooldown : MonoBehaviour
 	{
-		[RuntimeInitializeOnLoadMethod, System.Diagnostics.Conditional("UNITY_EDITOR")]
-		private static void ResetStatic() => _instance = null;
-
 		private static Cooldown _instance;
 
 		private readonly Dictionary<object, float> _cooldowns = new();

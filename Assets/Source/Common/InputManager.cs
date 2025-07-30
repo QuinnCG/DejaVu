@@ -36,7 +36,7 @@ namespace Quinn
 			else
 			{
 				Cursor.visible = false;
-				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.lockState = CursorLockMode.Confined;
 			}
 		}
 
