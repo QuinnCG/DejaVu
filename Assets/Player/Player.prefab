@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebef5334f4d95844b01b9b1fb5c0bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxGrabDistance: 10
+  MaxGrabDistance: 20
   GrabDistanceFactor: 1.5
   VelocityReductionThreshold: 25
   VelocityDecayRate: 20
