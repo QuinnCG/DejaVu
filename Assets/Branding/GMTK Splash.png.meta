@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: 3e05df75b5d691041b2bd8e3a26f000c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2770574002090400869
+    second: GMTK Splash_0
+  - first:
+      213: -8651622294816520335
+    second: GMTK Splash_1
+  - first:
+      213: -6610546510503815857
+    second: GMTK Splash_2
+  - first:
+      213: 212982786826055287
+    second: GMTK Splash_3
+  - first:
+      213: 7419883106208805010
+    second: GMTK Splash_4
+  - first:
+      213: -8769378617850556520
+    second: GMTK Splash_5
+  - first:
+      213: -4605744890331439017
+    second: GMTK Splash_6
+  - first:
+      213: -7869568298040247317
+    second: GMTK Splash_7
+  - first:
+      213: 2887732218716301530
+    second: GMTK Splash_8
+  - first:
+      213: 3896813961648790500
+    second: GMTK Splash_9
+  - first:
+      213: -3665650052033760457
+    second: GMTK Splash_10
+  - first:
+      213: -751787785780906053
+    second: GMTK Splash_11
+  - first:
+      213: -8976043550449193400
+    second: GMTK Splash_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GMTK Splash_0
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 924
+        width: 66
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b93287dcf91fc89d0800000000000000
+      internalID: -2770574002090400869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_1
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 925
+        width: 78
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1778c927c534fe780800000000000000
+      internalID: -8651622294816520335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_2
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 901
+        width: 97
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45d83e09fe9244a0800000000000000
+      internalID: -6610546510503815857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_3
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 903
+        width: 98
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e2a0857baa4f200800000000000000
+      internalID: 212982786826055287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_4
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 642
+        width: 6
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2907f747f58b8f660800000000000000
+      internalID: 7419883106208805010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_5
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 493
+        width: 339
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f8c16fb98ec4680800000000000000
+      internalID: -8769378617850556520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_6
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 500
+        width: 366
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75069bdac6b1510c0800000000000000
+      internalID: -4605744890331439017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 498
+        width: 381
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bebb2a3e35da9c290800000000000000
+      internalID: -7869568298040247317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_8
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 498
+        width: 244
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8290f2729431820800000000000000
+      internalID: 2887732218716301530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_9
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 114
+        width: 406
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ebdbd3e6a3441630800000000000000
+      internalID: 3896813961648790500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_10
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 214
+        width: 672
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 733b2a9f2bef02dc0800000000000000
+      internalID: -3665650052033760457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_11
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 119
+        width: 501
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb73d02fdfc1195f0800000000000000
+      internalID: -751787785780906053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GMTK Splash_12
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 118
+        width: 239
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e2a0fa2ffae6380800000000000000
+      internalID: -8976043550449193400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GMTK Splash_0: -2770574002090400869
+      GMTK Splash_1: -8651622294816520335
+      GMTK Splash_10: -3665650052033760457
+      GMTK Splash_11: -751787785780906053
+      GMTK Splash_12: -8976043550449193400
+      GMTK Splash_2: -6610546510503815857
+      GMTK Splash_3: 212982786826055287
+      GMTK Splash_4: 7419883106208805010
+      GMTK Splash_5: -8769378617850556520
+      GMTK Splash_6: -4605744890331439017
+      GMTK Splash_7: -7869568298040247317
+      GMTK Splash_8: 2887732218716301530
+      GMTK Splash_9: 3896813961648790500
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
