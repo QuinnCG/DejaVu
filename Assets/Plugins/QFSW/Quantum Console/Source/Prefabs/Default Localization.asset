@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2953cbddf20324dbe06d10386eef25, type: 3}
   m_Name: Default Localization
   m_EditorClassIdentifier: 
+  Loading: Loading...
+  ExecutingAsyncCommand: Executing async command...
+  EnterCommand: Enter Command...
+  CommandError: Error
+  ConsoleError: Processor Error
+  MaxLogSizeExceeded: Log of size {0} exceeded the maximum log size of {1}
+  InitializationProgress: 
+  InitializationComplete: 
