@@ -1,4 +1,6 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 namespace Quinn.PlayerSystem
 {
@@ -14,12 +16,17 @@ namespace Quinn.PlayerSystem
 		private float VelocityReductionThreshold = 20f;
 		[SerializeField]
 		private float VelocityDecayRate = 10f;
+		[SerializeField]
+		private LineRenderer Line;
+		[SerializeField, AssetsOnly]
+		private GameObject HandPrefab;
 
 		public bool IsGrabbing { get; private set; }
 
 		private Vector2 _grabPos, _desiredGrabPos;
 		private float _grabDst;
 
+		private GameObject _grabHand;
 		private CursorStateHandle _cursorState;
 
 		private void Awake()
@@ -49,6 +56,16 @@ namespace Quinn.PlayerSystem
 
 					Draw.Sphere(transform.position, 1f, Color.red);
 				}
+
+				var vertices = new Vector3[10];
+
+				for (int i = 0; i < vertices.Length; i++)
+				{
+					vertices[i] = Vector3.Lerp(transform.position, _grabPos, i / (float)(vertices.Length - 1));
+				}
+
+				Line.positionCount = vertices.Length;
+				Line.SetPositions(vertices);
 			}
 		}
 
@@ -70,6 +87,10 @@ namespace Quinn.PlayerSystem
 				}
 
 				_cursorState.ForceShowCursor = false;
+
+				_grabHand = HandPrefab.Clone(_grabPos);
+				var handDir = transform.position.DirectionTo(_grabPos);
+				_grabHand.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(handDir.y, handDir.x) * Mathf.Rad2Deg) - 90f, Vector3.forward);
 			}
 		}
 
@@ -81,6 +102,10 @@ namespace Quinn.PlayerSystem
 
 				_grabSpring.enabled = false;
 				_cursorState.ForceShowCursor = true;
+
+				Line.positionCount = 0;
+
+				_grabHand.Destroy();
 			}
 		}
 

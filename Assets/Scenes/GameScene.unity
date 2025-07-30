@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 000000008f9763e4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1208,6 +1208,34 @@ PrefabInstance:
     - target: {fileID: 5269309931406716933, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7908452938488141187, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
