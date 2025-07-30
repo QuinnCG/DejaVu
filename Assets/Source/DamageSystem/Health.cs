@@ -1,6 +1,5 @@
 using DG.Tweening;
 using FMODUnity;
-using Quinn.MovementSystem;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -83,13 +82,13 @@ namespace Quinn.DamageSystem
 		private float _nextImmunityEndTime;
 
 		// May be null.
-		private CharacterMovement _movement;
+		private Rigidbody2D _rb;
 
 		private void Awake()
 		{
 			Current = Max = Default;
 
-			TryGetComponent(out _movement);
+			TryGetComponent(out _rb);
 		}
 
 		private void FixedUpdate()
@@ -175,9 +174,9 @@ namespace Quinn.DamageSystem
 					StartCoroutine(BlinkSequence());
 				}
 
-				if (_movement != null)
+				if (_rb != null)
 				{
-					_movement.ApplyKnockback(info.Direction * info.Knockback, KnockbackDecayRate);
+					_rb.AddForce(info.Direction * info.Knockback, ForceMode2D.Impulse);
 				}
 
 				return true;

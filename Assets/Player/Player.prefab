@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 3628432574285543717}
   - component: {fileID: 402243408063040053}
   - component: {fileID: -8802311335246427373}
+  - component: {fileID: 2074963690522315874}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -475,6 +476,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxVelocity: 50
+--- !u!114 &2074963690522315874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269309931406716933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bb5026689ff27408da378c8722915a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpactSound:
+    Guid:
+      Data1: 286163252
+      Data2: 1137549718
+      Data3: -1475429978
+      Data4: -1371364983
+    Path: event:/Impact
+  SpeedThreshold: 0.5
+  MaxVolumeThreshold: 40
 --- !u!1 &7472241245969487581
 GameObject:
   m_ObjectHideFlags: 0

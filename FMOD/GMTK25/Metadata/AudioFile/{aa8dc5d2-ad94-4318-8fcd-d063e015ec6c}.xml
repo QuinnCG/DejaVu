@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{aa8dc5d2-ad94-4318-8fcd-d063e015ec6c}">
 		<property name="assetPath">
-			<value>Impact Body Punch 01.wav</value>
+			<value>Tether/Impact Body Punch 01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

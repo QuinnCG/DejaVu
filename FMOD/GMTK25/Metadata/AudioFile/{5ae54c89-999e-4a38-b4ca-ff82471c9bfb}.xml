@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{5ae54c89-999e-4a38-b4ca-ff82471c9bfb}">
 		<property name="assetPath">
-			<value>Impact Punch Hard Single 01.wav</value>
+			<value>Tether/Impact Punch Hard Single 01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
