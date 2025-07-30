@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1474074107786788445}
   - component: {fileID: 7327414020169909597}
-  - component: {fileID: 5525196935966317207}
-  - component: {fileID: 5246868748816509837}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -75,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -463235185
+  m_SortingLayer: -1
+  m_SortingOrder: 100
   m_Sprite: {fileID: -4595868316485779318, guid: 67707618df215f443a6059500440920d, type: 3}
   m_Color: {r: 0.437675, g: 0, b: 1, a: 1}
   m_FlipX: 0
@@ -89,59 +87,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!58 &5525196935966317207
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852794614287416250}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.02455604, y: 0.5601852}
-  m_Radius: 5
---- !u!249 &5246868748816509837
-AreaEffector2D:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852794614287416250}
-  m_Enabled: 0
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 2
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_LinearDamping: 0
-  m_AngularDamping: 0

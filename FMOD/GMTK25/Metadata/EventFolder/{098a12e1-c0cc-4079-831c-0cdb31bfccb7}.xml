@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EventFolder" id="{098a12e1-c0cc-4079-831c-0cdb31bfccb7}">
+		<property name="name">
+			<value>Tether</value>
+		</property>
+		<relationship name="folder">
+			<destination>{545a6d41-a392-4790-9cd3-892eb3f90337}</destination>
+		</relationship>
+	</object>
+</objects>

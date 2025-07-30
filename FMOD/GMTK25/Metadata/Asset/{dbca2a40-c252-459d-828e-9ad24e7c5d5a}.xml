@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{dbca2a40-c252-459d-828e-9ad24e7c5d5a}">
+		<property name="assetPath">
+			<value>Tether/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{45014679-8045-47c6-a081-3fc1dcbce1e5}</destination>
+		</relationship>
+	</object>
+</objects>

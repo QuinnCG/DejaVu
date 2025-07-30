@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{c8505e6c-918e-45dc-9709-5e489e475468}">
+		<property name="assetPath">
+			<value>Impact Punch Wet Punch 01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.22758333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{45014679-8045-47c6-a081-3fc1dcbce1e5}</destination>
+		</relationship>
+	</object>
+</objects>

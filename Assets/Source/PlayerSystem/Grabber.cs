@@ -1,3 +1,4 @@
+using FMODUnity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -13,17 +14,29 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float GrabDistanceFactor = 1.5f;
 		[SerializeField]
-		private float MaxTetherDistance = 5f;
-		[SerializeField]
 		private float VelocityReductionThreshold = 20f;
 		[SerializeField]
 		private float VelocityDecayRate = 10f;
 		[SerializeField]
+		private float CooldownAfterRelease = 0.3f;
+
+		[SerializeField]
 		private LineRenderer Line;
 		[SerializeField]
 		private AnimationCurve LineThicknessChangeOverDistance;
+		[SerializeField]
+		private float LineFrequencyFactor = 1f;
+		[SerializeField]
+		private AnimationCurve LineAmpFactor;
+		[SerializeField]
+		private float LineAmpMultiplier = 1f;
+		[SerializeField]
+		private float LineExtendDuration = 0.1f;
 		[SerializeField, AssetsOnly]
 		private GameObject HandPrefab;
+
+		[SerializeField, FoldoutGroup("SFX")]
+		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound;
 
 		public bool IsGrabbing { get; private set; }
 
@@ -33,7 +46,9 @@ namespace Quinn.PlayerSystem
 		private GameObject _grabHand;
 		private CursorStateHandle _cursorState;
 
-		private Vector2 _grabHandVel;
+		private float _nextAllowedGrabTime;
+		private float _grabStartTime;
+		private bool _hasGrabReachedYet;
 
 		private void Awake()
 		{
@@ -63,44 +78,70 @@ namespace Quinn.PlayerSystem
 					Draw.Sphere(transform.position, 1f, Color.red);
 				}
 
-				var vertices = new Vector3[10];
+
+
+				float normExtendElapsed = (Time.time - _grabStartTime) / LineExtendDuration;
+				normExtendElapsed = Mathf.Min(normExtendElapsed, 1f);
+
+				if (normExtendElapsed >= 1f && !_hasGrabReachedYet)
+				{
+					_hasGrabReachedYet = true;
+					Audio.Play(GrabReachedSound);
+				}
+
+				float normGrabDst = Mathf.Min(transform.position.DistanceTo(_grabPos) / MaxGrabDistance, 1f);
+
+				var vertices = new Vector3[32];
 
 				for (int i = 0; i < vertices.Length; i++)
 				{
-					vertices[i] = Vector3.Lerp(transform.position, _grabHand.transform.position, i / (float)(vertices.Length - 1));
+					float t = i / (float)(vertices.Length - 1);
+					Vector3 basePos = Vector3.Lerp(transform.position, _grabHand.transform.position, t);
+
+					Vector3 perpDir = transform.position.DirectionTo(_grabHand.transform.position);
+					perpDir.Set(-perpDir.y, perpDir.x, 0f);
+
+					// Perpendicular offset (appearance of elastic band shooting out).
+					Vector3 offset = Mathf.Sin(t * Mathf.PI * LineFrequencyFactor) * LineAmpFactor.Evaluate(normExtendElapsed) * LineAmpMultiplier * t * normGrabDst * perpDir;
+
+					vertices[i] = basePos + offset;
 				}
 
 				Line.positionCount = vertices.Length;
 				Line.SetPositions(vertices);
 				Line.widthCurve = GetLineWidthCurve();
 
-				Vector2 handPos = Vector2.SmoothDamp(_grabHand.transform.position, _grabPos, ref _grabHandVel, 0.01f);
-				Quaternion handRot = GetHandRotation();
+				var handPos = Vector2.LerpUnclamped(_grabHand.transform.position, _grabPos, normExtendElapsed);
+				var handRot = GetHandRotation();
 				_grabHand.transform.SetPositionAndRotation(handPos, handRot);
 			}
 		}
 
 		public void Grab()
 		{
-			if (!IsGrabbing)
+			if (!IsGrabbing && Time.time >= _nextAllowedGrabTime)
 			{
 				IsGrabbing = true;
 
 				_desiredGrabPos = GetCursorWorldPos();
 				_grabPos = GetGrabPoint(_desiredGrabPos);
 
-				if (transform.position.DistanceTo(_grabPos) <= MaxTetherDistance)
+				if (transform.position.DistanceTo(_grabPos) <= MaxGrabDistance)
 				{
 					_grabSpring.connectedAnchor = _grabPos;
 
-					_initGrabDst = Mathf.Min(transform.position.DistanceTo(_grabPos) * GrabDistanceFactor, MaxTetherDistance);
+					_initGrabDst = Mathf.Min(transform.position.DistanceTo(_grabPos) * GrabDistanceFactor, MaxGrabDistance);
 					_grabSpring.distance = _initGrabDst;
 				}
 
 				_cursorState.ForceShowCursor = false;
 
-				_grabHandVel = Vector2.zero;
+				_grabStartTime = Time.time;
 				_grabHand = Instantiate(HandPrefab, transform.position, GetHandRotation());
+
+				_hasGrabReachedYet = false;
+
+				Audio.Play(GrabStartSound);
 			}
 		}
 
@@ -116,6 +157,10 @@ namespace Quinn.PlayerSystem
 				Line.positionCount = 0;
 
 				_grabHand.Destroy();
+
+				_nextAllowedGrabTime = Time.time + CooldownAfterRelease;
+
+				Audio.Play(GrabReleasedSound);
 			}
 		}
 
@@ -140,7 +185,7 @@ namespace Quinn.PlayerSystem
 
 		private AnimationCurve GetLineWidthCurve()
 		{
-			float dstNorm = Mathf.Min(transform.position.DistanceTo(_grabPos) / MaxTetherDistance, 1f);
+			float dstNorm = Mathf.Min(transform.position.DistanceTo(_grabPos) / MaxGrabDistance, 1f);
 			float t = LineThicknessChangeOverDistance.Evaluate(dstNorm);
 
 			var start = new Keyframe(0f, 1f)

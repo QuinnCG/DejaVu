@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{0bcd9018-3bf1-416e-85c9-d85b1ee40428}">
+		<property name="assetPath">
+			<value>zapsplat_foley_paper_newspaper_pick_up_grab_003_81497.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.58044791666666662</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{45014679-8045-47c6-a081-3fc1dcbce1e5}</destination>
+		</relationship>
+	</object>
+</objects>
