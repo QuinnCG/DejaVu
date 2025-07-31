@@ -1,13 +1,14 @@
-using FMOD;
 using FMODUnity;
+using Quinn.DamageSystem;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 
 namespace Quinn.PlayerSystem
 {
 	public class Player : MonoBehaviour
 	{
+		public static Player Instance { get; private set; }
+
 		[SerializeField]
 		private float MinAccelerationRate = 2f, MaxAccelerationRate = 16f;
 		[SerializeField]
@@ -44,12 +45,20 @@ namespace Quinn.PlayerSystem
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference Footstep;
 
+		public Collider2D Collider { get; private set; }
+		public Health Health { get; private set; }
+
 		private Animator _animator;
 		private Rigidbody2D _rb;
 		private Grabber _grabber;
 
 		private void Awake()
 		{
+			Instance = this;
+
+			Collider = GetComponent<Collider2D>();
+			Health = GetComponent<Health>();
+
 			_animator = GetComponent<Animator>();
 			_rb = GetComponent<Rigidbody2D>();
 			_grabber = GetComponent<Grabber>();
