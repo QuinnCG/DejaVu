@@ -54,6 +54,7 @@ namespace Quinn.PlayerSystem
 
 			UpdateDash(moveDir);
 			UpdateGrab();
+			UpdatePunch();
 			UpdateMovement(moveDir);
 		}
 
@@ -88,6 +89,14 @@ namespace Quinn.PlayerSystem
 			else if (Input.GetMouseButtonUp(1))
 			{
 				_grabber.Release();
+			}
+		}
+
+		private void UpdatePunch()
+		{
+			if (Input.GetMouseButtonDown(0) && !_grabber.IsGrabbing)
+			{
+				_grabber.Punch();
 			}
 		}
 

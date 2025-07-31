@@ -1,5 +1,7 @@
 using FMODUnity;
+using Quinn.DamageSystem;
 using Sirenix.OdinInspector;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -38,14 +40,15 @@ namespace Quinn.PlayerSystem
 
 		[SerializeField, AssetsOnly]
 		private GameObject HandPrefab;
+		[SerializeField]
+		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 6f, PunchCooldown = 1f;
 
 		[SerializeField, FoldoutGroup("SFX")]
-		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound;
+		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound, PunchHitSound;
 
 		public bool IsGrabbing { get; private set; }
 
 		private Rigidbody2D _rb;
-		private Hand _hand;
 		private SpringJoint2D _grabSpring;
 
 		private Vector2 _grabPos, _desiredGrabPos;
@@ -59,10 +62,12 @@ namespace Quinn.PlayerSystem
 
 		private Rigidbody2D _grabbedRB;
 
+		private float _nextAllowedPunchTime;
+		private bool _isPunching;
+
 		private void Awake()
 		{
 			_rb = GetComponent<Rigidbody2D>();
-			_hand = GetComponent<Hand>();
 			_grabSpring = GetComponent<SpringJoint2D>();
 		}
 
@@ -70,7 +75,7 @@ namespace Quinn.PlayerSystem
 		{
 			if (IsGrabbing)
 			{
-				_grabSpring.enabled = (GetOriginPoint().DistanceTo(GetGrabPoint()) >= _targetTetherDistance) && !_isFailedGrabAttempt;
+				_grabSpring.enabled = (GetOriginPoint().DistanceTo(GetGrabPoint()) >= _targetTetherDistance) && !_isFailedGrabAttempt && !_isPunching;
 
 				// Reduce velocity if it gets too high.
 				if (_rb.linearVelocity.magnitude > VelocityReductionThreshold)
@@ -95,13 +100,20 @@ namespace Quinn.PlayerSystem
 				UpdateLineData(normExtendElapsed);
 
 				// Hand is fully extended.
-				if (normExtendElapsed >= 1f && !_hasGrabReachedYet)
+				if (normExtendElapsed > 0.9f && !_hasGrabReachedYet)
 				{
 					_hasGrabReachedYet = true;
 					Audio.Play(GrabReachedSound);
 
 					if (_isFailedGrabAttempt)
 					{
+						Release();
+					}
+					else if (_isPunching)
+					{
+						Audio.Play(PunchHitSound, _grabHand.transform.position);
+
+						ApplyPunchDamage();
 						Release();
 					}
 				}
@@ -112,6 +124,7 @@ namespace Quinn.PlayerSystem
 		{
 			if (!IsGrabbing && Time.time >= _nextAllowedGrabTime)
 			{
+				_isPunching = false;
 				_grabbedRB = null;
 
 				_desiredGrabPos = GetCursorWorldPos();
@@ -171,20 +184,6 @@ namespace Quinn.PlayerSystem
 			}
 		}
 
-		private RaycastHit2D LineOfSightRigidbody()
-		{
-			Vector2 end = _desiredGrabPos + GetOriginPoint().DirectionTo(_desiredGrabPos) * 1f;
-			var hits = Physics2D.LinecastAll(GetOriginPoint(), end).OrderBy(x => x.point.DistanceTo(GetOriginPoint())).ToList();
-
-			return hits.FirstOrDefault(x => x.rigidbody != _rb && x.rigidbody != null && x.rigidbody.bodyType == RigidbodyType2D.Dynamic);
-		}
-
-		private RaycastHit2D LineOfSightObstacle()
-		{
-			Vector2 end = _desiredGrabPos + (Vector2)(GetOriginPoint().DirectionTo(_desiredGrabPos) * 1f);
-			return Physics2D.Linecast(GetOriginPoint(), end, LayerMask.GetMask("Obstacle"));
-		}
-
 		public void Release()
 		{
 			if (IsGrabbing)
@@ -200,6 +199,52 @@ namespace Quinn.PlayerSystem
 
 				_grabHand.Destroy();
 			}
+		}
+
+		public void Punch()
+		{
+			if (Time.time > _nextAllowedPunchTime)
+			{
+				_nextAllowedPunchTime = Time.time + PunchCooldown;
+
+				Grab();
+				_isPunching = true;
+			}
+		}
+
+		private void ApplyPunchDamage()
+		{
+			var colliders = Physics2D.OverlapCircleAll(_grabHand.transform.position, PunchRadius);
+
+			foreach (var collider in colliders)
+			{
+				if (collider.TryGetComponent(out IDamageable damage))
+				{
+					damage.TakeDamage(new DamageInfo()
+					{
+						Damage = PunchDamage,
+						Source = gameObject,
+						Owner = gameObject,
+						Direction = GetOriginPoint().DirectionTo(_grabHand.transform.position),
+						Knockback = PunchKnockback,
+						Team = Team.Friendly
+					});
+				}
+			}
+		}
+
+		private RaycastHit2D LineOfSightRigidbody()
+		{
+			Vector2 end = _desiredGrabPos + GetOriginPoint().DirectionTo(_desiredGrabPos) * 1f;
+			var hits = Physics2D.LinecastAll(GetOriginPoint(), end).OrderBy(x => x.point.DistanceTo(GetOriginPoint())).ToList();
+
+			return hits.FirstOrDefault(x => x.rigidbody != _rb && x.rigidbody != null && x.rigidbody.bodyType == RigidbodyType2D.Dynamic);
+		}
+
+		private RaycastHit2D LineOfSightObstacle()
+		{
+			Vector2 end = _desiredGrabPos + (Vector2)(GetOriginPoint().DirectionTo(_desiredGrabPos) * 1f);
+			return Physics2D.Linecast(GetOriginPoint(), end, LayerMask.GetMask("Obstacle"));
 		}
 
 		private Quaternion GetHandRotation()
@@ -296,7 +341,7 @@ namespace Quinn.PlayerSystem
 
 		private Vector2 GetGrabPoint()
 		{
-			if (_grabbedRB == null)
+			if (_grabbedRB == null || _isPunching)
 			{
 				return _grabPos;
 			}
