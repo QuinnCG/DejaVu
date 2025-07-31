@@ -248,7 +248,7 @@ namespace Quinn.PlayerSystem
 
 			if (hitAny)
 			{
-				Audio.Play(PunchHitSound, _grabHand.transform.position);
+				Audio.Play(PunchHitSound, GetGrabPoint());
 			}
 		}
 
