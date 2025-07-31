@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 6729680961607706630}
   - component: {fileID: 2741730318551483156}
   - component: {fileID: 3628432574285543717}
+  - component: {fileID: 1006420988239529291}
   - component: {fileID: 402243408063040053}
   - component: {fileID: -8802311335246427373}
   - component: {fileID: 2074963690522315874}
@@ -366,6 +367,108 @@ MonoBehaviour:
   DashForce: 12
   CameraTarget: {fileID: 6301917815544289479}
   CamTargetPlayerToCursorBias: 0.5
+--- !u!114 &1006420988239529291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269309931406716933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ea7b6cf39dc0d429fe6bfe96b1a4d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineThicknessChangeOverDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LineFrequencyFactor: 1
+  LineAmpFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 27.87551
+      outSlope: 27.87551
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.0648616
+    - serializedVersion: 3
+      time: 0.37149814
+      value: 0.9684948
+      inSlope: 0.41211432
+      outSlope: 0.41211432
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.48253876
+      outWeight: 0.33309212
+    - serializedVersion: 3
+      time: 0.49503314
+      value: 1.0669326
+      inSlope: 0.11177094
+      outSlope: 0.11177094
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.32888067
+      outWeight: 0.73146755
+    - serializedVersion: 3
+      time: 0.73714834
+      value: -0.26835412
+      inSlope: -0.042722363
+      outSlope: -0.042722363
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30538818
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.9258654
+      value: 0.1042369
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30573452
+      outWeight: 0.3571011
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.4060495
+      outSlope: -1.4060495
+      tangentMode: 34
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LineAmpMultiplier: 1
+  LineExtendDuration: 0.1
+  HandPrefab: {fileID: 1852794614287416250, guid: f3427975faa4d44448bdfb149827b7dd, type: 3}
+  OpenHand: {fileID: 21300000, guid: 1f05ced8b808e70439ac05c8f418f325, type: 3}
+  ClosedHand: {fileID: 21300000, guid: 67707618df215f443a6059500440920d, type: 3}
 --- !u!114 &402243408063040053
 MonoBehaviour:
   m_ObjectHideFlags: 0

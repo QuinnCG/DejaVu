@@ -45,6 +45,7 @@ namespace Quinn.PlayerSystem
 		public bool IsGrabbing { get; private set; }
 
 		private Rigidbody2D _rb;
+		private Hand _hand;
 		private SpringJoint2D _grabSpring;
 
 		private Vector2 _grabPos, _desiredGrabPos;
@@ -61,6 +62,7 @@ namespace Quinn.PlayerSystem
 		private void Awake()
 		{
 			_rb = GetComponent<Rigidbody2D>();
+			_hand = GetComponent<Hand>();
 			_grabSpring = GetComponent<SpringJoint2D>();
 		}
 
