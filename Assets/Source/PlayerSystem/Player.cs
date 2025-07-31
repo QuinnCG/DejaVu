@@ -26,6 +26,8 @@ namespace Quinn.PlayerSystem
 		private float DashForce = 12f;
 		[SerializeField]
 		private float DashCooldown = 0.5f;
+		[SerializeField]
+		private EventReference DashSound;
 
 		[Space]
 
@@ -112,6 +114,7 @@ namespace Quinn.PlayerSystem
 				Cooldown.Call(this, DashCooldown, () =>
 				{
 					_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
+					Audio.Play(DashSound, transform.position);
 				});
 			}
 		}

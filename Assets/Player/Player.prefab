@@ -701,6 +701,13 @@ MonoBehaviour:
   DragFactorWhileGrabbing: 0.3
   DashForce: 24
   DashCooldown: 0.5
+  DashSound:
+    Guid:
+      Data1: 1864077417
+      Data2: 1205337296
+      Data3: -1802973539
+      Data4: -1656295050
+    Path: event:/Player/Dash
   CameraTarget: {fileID: 6301917815544289479}
   CamTargetPlayerToCursorBias: 0.05
   RootSprite: {fileID: 7966090516581987259}
