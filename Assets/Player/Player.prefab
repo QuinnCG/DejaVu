@@ -834,6 +834,7 @@ MonoBehaviour:
   PunchKnockback: 24
   PunchCooldown: 0.8
   AdditionalPunchDistance: 1
+  PunchSelfPush: 6
   GrabStartSound:
     Guid:
       Data1: -442846422

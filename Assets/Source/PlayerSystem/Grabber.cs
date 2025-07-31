@@ -48,7 +48,7 @@ namespace Quinn.PlayerSystem
 		[SerializeField, Required]
 		private Sprite OpenHand, ClosedHand;
 		[SerializeField]
-		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 12f, PunchCooldown = 1f, AdditionalPunchDistance = 2f;
+		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 12f, PunchCooldown = 1f, AdditionalPunchDistance = 2f, PunchSelfPush = 6f;
 
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound, PunchHitSound;
@@ -255,6 +255,7 @@ namespace Quinn.PlayerSystem
 			if (hitAny)
 			{
 				Audio.Play(PunchHitSound, GetGrabPoint());
+				_rb.AddForce(-dir * PunchSelfPush, ForceMode2D.Impulse);
 			}
 		}
 
