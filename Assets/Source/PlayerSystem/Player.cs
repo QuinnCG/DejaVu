@@ -7,7 +7,7 @@ namespace Quinn.PlayerSystem
 	public class Player : MonoBehaviour
 	{
 		[SerializeField]
-		private float AccelerationRate = 10f;
+		private float MinAccelerationRate = 2f, MaxAccelerationRate = 16f;
 		[SerializeField]
 		private float LinearDrag = 5f;
 
@@ -65,8 +65,17 @@ namespace Quinn.PlayerSystem
 
 		private void UpdateMovement(Vector2 moveDir)
 		{
+			Vector2 a1 = moveDir;
+			Vector2 a2 = _rb.linearVelocity.normalized;
+
+			float aDelta = Vector2.Angle(a1, a2);
+			float norm = Mathf.Clamp01(aDelta / 180f);
+
+			float force = Mathf.Lerp(MinAccelerationRate, MaxAccelerationRate, norm);
+			force *= _grabber.IsGrabbing ? AccelerationFactorWhileGrabbing : 1f;
+
+			_rb.AddForce(force * moveDir);
 			_rb.linearDamping = LinearDrag * (_grabber.IsGrabbing ? DragFactorWhileGrabbing : 1f);
-			_rb.AddForce((_grabber.IsGrabbing ? AccelerationFactorWhileGrabbing : 1f) * AccelerationRate * moveDir);
 		}
 
 		private void UpdateDash(Vector2 moveDir)

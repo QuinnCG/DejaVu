@@ -360,7 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7374bde24ed4de34f975a79bb2ee789f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerationRate: 15
+  MinAccelerationRate: 10
+  MaxAccelerationRate: 32
   LinearDrag: 5
   AccelerationFactorWhileGrabbing: 0.3
   DragFactorWhileGrabbing: 0.3

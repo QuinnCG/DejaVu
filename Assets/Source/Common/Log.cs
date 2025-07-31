@@ -28,6 +28,15 @@ namespace Quinn
 		}
 
 		[HideInCallstack]
+		public static void Important(object message)
+		{
+			if (Debug.isDebugBuild || Application.isEditor)
+			{
+				Debug.Log($"{message}".ToColor(Color.white).ToBold());
+			}
+		}
+
+		[HideInCallstack]
 		public static void Warning(object message)
 		{
 			if (Debug.isDebugBuild || Application.isEditor)
