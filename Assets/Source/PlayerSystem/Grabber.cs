@@ -40,6 +40,8 @@ namespace Quinn.PlayerSystem
 
 		[SerializeField, AssetsOnly]
 		private GameObject HandPrefab;
+		[SerializeField, Required]
+		private Sprite OpenHand, ClosedHand;
 		[SerializeField]
 		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 12f, PunchCooldown = 1f, AdditionalPunchDistance = 2f;
 
@@ -54,6 +56,7 @@ namespace Quinn.PlayerSystem
 		private Vector2 _grabPos, _desiredGrabPos;
 		private float _targetTetherDistance;
 		private GameObject _grabHand;
+		private SpriteRenderer _handRenderer;
 
 		private float _nextAllowedGrabTime;
 		private float _grabStartTime;
@@ -117,6 +120,8 @@ namespace Quinn.PlayerSystem
 						Release();
 					}
 				}
+
+				_handRenderer.sprite = (!_isPunching && normExtendElapsed < 1f) ? OpenHand : ClosedHand;
 			}
 		}
 
@@ -177,6 +182,7 @@ namespace Quinn.PlayerSystem
 
 				_grabStartTime = Time.time;
 				_grabHand = Instantiate(HandPrefab, GetOriginPoint(), GetHandRotation());
+				_handRenderer = _grabHand.GetComponent<SpriteRenderer>();
 
 				_hasGrabReachedYet = false;
 
