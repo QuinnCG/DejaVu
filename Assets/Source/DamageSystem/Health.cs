@@ -104,11 +104,14 @@ namespace Quinn.DamageSystem
 				return;
 			}
 
-			foreach (var renderer in Renderers)
+			if (FlashOnHurt)
 			{
-				if (!renderer.sharedMaterial.HasFloat("_Flash"))
+				foreach (var renderer in Renderers)
 				{
-					Debug.LogWarning($"{renderer.gameObject.name} has a SpriteRenderer whose material is lacking '_Flash'!");
+					if (!renderer.sharedMaterial.HasFloat("_Flash"))
+					{
+						Debug.LogWarning($"{renderer.gameObject.name} has a SpriteRenderer whose material is lacking '_Flash'!");
+					}
 				}
 			}
 		}

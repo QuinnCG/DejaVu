@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{8c43b81f-9c5f-480a-85f4-6db19e979d35}">
+		<property name="assetPath">
+			<value>Waterball/Waterball Hit (4).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0973124999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{45014679-8045-47c6-a081-3fc1dcbce1e5}</destination>
+		</relationship>
+	</object>
+</objects>
