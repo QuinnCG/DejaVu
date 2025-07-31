@@ -409,7 +409,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  LineFrequencyFactor: 4
+  LineFrequencyFactor: 3
   LineAmpFactor:
     serializedVersion: 2
     m_Curve:
@@ -479,7 +479,7 @@ MonoBehaviour:
   PunchDamage: 10
   PunchKnockback: 24
   PunchCooldown: 0.8
-  AdditionalPunchDistance: 3
+  AdditionalPunchDistance: 1
   GrabStartSound:
     Guid:
       Data1: -442846422

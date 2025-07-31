@@ -108,15 +108,11 @@ namespace Quinn.PlayerSystem
 					_hasGrabReachedYet = true;
 					Audio.Play(GrabReachedSound);
 
-					if (_isFailedGrabAttempt)
+					if (_isFailedGrabAttempt || _isPunching)
 					{
-						Release();
-					}
-					else if (_isPunching)
-					{
-						Audio.Play(PunchHitSound, _grabHand.transform.position);
+						_isPunching = false;
+						_isFailedGrabAttempt = false;
 
-						ApplyPunchDamage();
 						Release();
 					}
 				}
@@ -215,24 +211,27 @@ namespace Quinn.PlayerSystem
 
 				Grab();
 				_isPunching = true;
+
+				ApplyPunchDamage();
 			}
 		}
 
 		private void ApplyPunchDamage()
 		{
-			Vector2 origin = GetOriginPoint();
+			Vector2 start = GetOriginPoint();
+			Vector2 end = GetGrabPoint();
 
-			Vector2 dir = origin.DirectionTo(_grabHand.transform.position);
-			float maxDst = origin.DistanceTo(_grabHand.transform.position);
+			Vector2 dir = start.DirectionTo(end);
+			float maxDst = start.DistanceTo(end);
 
-			Physics2D.CircleCastAll(GetOriginPoint(), PunchRadius, dir, maxDst + 1f);
-			var colliders = Physics2D.OverlapCircleAll(_grabHand.transform.position, PunchRadius);
+			bool hitAny = false;
+			var hits = Physics2D.CircleCastAll(GetOriginPoint(), PunchRadius, dir, maxDst + 1f);
 
-			foreach (var collider in colliders)
+			foreach (var hit in hits)
 			{
-				if (collider.TryGetComponent(out IDamageable damage))
+				if (hit.collider.TryGetComponent(out IDamageable damage))
 				{
-					damage.TakeDamage(new DamageInfo()
+					bool success = damage.TakeDamage(new DamageInfo()
 					{
 						Damage = PunchDamage,
 						Source = gameObject,
@@ -241,7 +240,15 @@ namespace Quinn.PlayerSystem
 						Knockback = PunchKnockback,
 						Team = Team.Friendly
 					});
+
+					if (success)
+						hitAny = true;
 				}
+			}
+
+			if (hitAny)
+			{
+				Audio.Play(PunchHitSound, _grabHand.transform.position);
 			}
 		}
 
