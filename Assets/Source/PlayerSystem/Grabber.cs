@@ -10,6 +10,11 @@ namespace Quinn.PlayerSystem
 {
 	public class Grabber : MonoBehaviour
 	{
+		[SerializeField, Required]
+		private Transform HandOrigin;
+
+		[Space]
+
 		[SerializeField]
 		private float MaxGrabDistance = 5f;
 		[SerializeField]
@@ -49,6 +54,7 @@ namespace Quinn.PlayerSystem
 		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound, PunchHitSound;
 
 		public bool IsGrabbing { get; private set; }
+		public Vector2 GrabPosition => GetGrabPoint();
 
 		private Rigidbody2D _rb;
 		private SpringJoint2D _grabSpring;
@@ -358,7 +364,7 @@ namespace Quinn.PlayerSystem
 
 		private Vector2 GetOriginPoint()
 		{
-			return transform.position;
+			return HandOrigin.position;
 		}
 
 		private Vector2 GetGrabPoint()

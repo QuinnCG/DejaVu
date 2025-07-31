@@ -1,3 +1,5 @@
+using FMOD;
+using FMODUnity;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -22,6 +24,8 @@ namespace Quinn.PlayerSystem
 
 		[SerializeField]
 		private float DashForce = 12f;
+		[SerializeField]
+		private float DashCooldown = 0.5f;
 
 		[Space]
 
@@ -30,11 +34,21 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float CamTargetPlayerToCursorBias = 0.3f;
 
+		[Space]
+
+		[SerializeField, Required]
+		private Transform RootSprite;
+
+		[SerializeField, FoldoutGroup("SFX")]
+		private EventReference Footstep;
+
+		private Animator _animator;
 		private Rigidbody2D _rb;
 		private Grabber _grabber;
 
 		private void Awake()
 		{
+			_animator = GetComponent<Animator>();
 			_rb = GetComponent<Rigidbody2D>();
 			_grabber = GetComponent<Grabber>();
 		}
@@ -61,6 +75,19 @@ namespace Quinn.PlayerSystem
 		private void LateUpdate()
 		{
 			UpdateCameraTarget();
+			UpdateFaceDirection();
+			UpdateAnimation();
+		}
+
+		private void FixedUpdate()
+		{
+			float mag = _rb.linearVelocity.magnitude;
+
+			if (mag < 0.5f)
+			{
+				mag = Mathf.Max(0f, mag - (Time.deltaTime * 5f));
+				_rb.linearVelocity = _rb.linearVelocity.normalized * mag;
+			}
 		}
 
 		private void UpdateMovement(Vector2 moveDir)
@@ -82,7 +109,7 @@ namespace Quinn.PlayerSystem
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				Cooldown.Call(this, 0.5f, () =>
+				Cooldown.Call(this, DashCooldown, () =>
 				{
 					_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
 				});
@@ -115,6 +142,38 @@ namespace Quinn.PlayerSystem
 			CameraTarget.position = Vector2.Lerp(transform.position, mousePos, CamTargetPlayerToCursorBias);
 
 			Draw.Sphere(CameraTarget.position, 0.2f, Color.azure, 0f, true);
+		}
+
+		private void UpdateFaceDirection()
+		{
+			Vector2 dir = transform.position.DirectionTo(CrosshairManager.Instance.Position);
+
+			if (_grabber.IsGrabbing)
+			{
+				dir = transform.position.DirectionTo(_grabber.GrabPosition);
+			}
+
+			dir = _rb.linearVelocity.normalized;
+
+			if (dir.x != 0f)
+			{
+				float xDir = Mathf.Sign(dir.x);
+
+				var scale = transform.localScale;
+				scale.x = Mathf.Abs(scale.x) * xDir;
+				transform.localScale = scale;
+			}
+		}
+
+		private void UpdateAnimation()
+		{
+			_animator.SetFloat("NormSpeed", _rb.linearVelocity.magnitude / MaxAccelerationRate);
+			_animator.SetBool("IsMoving", _rb.linearVelocity.sqrMagnitude > 0f);
+		}
+
+		protected void Footstep_Anim()
+		{
+			Audio.Play(Footstep, transform.position);
 		}
 	}
 }

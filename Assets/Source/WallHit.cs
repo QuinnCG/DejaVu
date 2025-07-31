@@ -24,6 +24,7 @@ namespace Quinn
 		private void Awake()
 		{
 			_instance = RuntimeManager.CreateInstance(ImpactSound);
+			_instance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
 		}
 
 		private void OnDestroy()

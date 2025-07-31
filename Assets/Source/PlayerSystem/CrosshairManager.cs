@@ -10,6 +10,8 @@ namespace Quinn.PlayerSystem
 		[SerializeField, AssetsOnly]
 		private GameObject Prefab;
 
+		public Vector2 Position => _crosshair.transform.position;
+
 		private GameObject _crosshair;
 
 		private void Awake()
