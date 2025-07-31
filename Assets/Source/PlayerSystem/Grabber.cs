@@ -41,7 +41,7 @@ namespace Quinn.PlayerSystem
 		[SerializeField, AssetsOnly]
 		private GameObject HandPrefab;
 		[SerializeField]
-		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 6f, PunchCooldown = 1f;
+		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 12f, PunchCooldown = 1f, AdditionalPunchDistance = 2f;
 
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound, PunchHitSound;
@@ -214,6 +214,12 @@ namespace Quinn.PlayerSystem
 
 		private void ApplyPunchDamage()
 		{
+			Vector2 origin = GetOriginPoint();
+
+			Vector2 dir = origin.DirectionTo(_grabHand.transform.position);
+			float maxDst = origin.DistanceTo(_grabHand.transform.position);
+
+			Physics2D.CircleCastAll(GetOriginPoint(), PunchRadius, dir, maxDst + 1f);
 			var colliders = Physics2D.OverlapCircleAll(_grabHand.transform.position, PunchRadius);
 
 			foreach (var collider in colliders)
@@ -225,7 +231,7 @@ namespace Quinn.PlayerSystem
 						Damage = PunchDamage,
 						Source = gameObject,
 						Owner = gameObject,
-						Direction = GetOriginPoint().DirectionTo(_grabHand.transform.position),
+						Direction = dir,
 						Knockback = PunchKnockback,
 						Team = Team.Friendly
 					});
@@ -328,7 +334,10 @@ namespace Quinn.PlayerSystem
 
 		private void UpdateHandTransform(float normExtendElapsed)
 		{
-			var handPos = Vector2.Lerp(_grabHand.transform.position, GetGrabPoint(), normExtendElapsed);
+			Vector2 dir = GetOriginPoint().DirectionTo(GetGrabPoint());
+			float addend = _isPunching ? AdditionalPunchDistance : 0f;
+
+			var handPos = Vector2.Lerp(_grabHand.transform.position, GetOriginPoint() + (dir * (GetDistanceToGrabPoint() + addend)), normExtendElapsed);
 			var handRot = GetHandRotation();
 
 			_grabHand.transform.SetPositionAndRotation(handPos, handRot);

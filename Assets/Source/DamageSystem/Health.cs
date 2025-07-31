@@ -15,8 +15,6 @@ namespace Quinn.DamageSystem
 		public Team Team { get; private set; } = Team.Hostile;
 		[SerializeField, Unit(Units.Second), Tooltip("How long to be immune from damage for after taking damage. 0 will disable this feature.")]
 		private float ImmunityOnHurt = 0f;
-		[SerializeField]
-		private float KnockbackDecayRate = 20f;
 
 		[Space]
 
@@ -46,10 +44,10 @@ namespace Quinn.DamageSystem
 		[SerializeField, FoldoutGroup("SFX")]
 		private bool PlayHurtOnDeathToo = false;
 
-		[ShowInInspector]
-		public float Current { get; private set; }
-		[ShowInInspector]
-		public float Max { get; private set; }
+		[ShowInInspector, ReadOnly]
+		public float Current { get; private set; } = float.NaN;
+		[ShowInInspector, ReadOnly]
+		public float Max { get; private set; } = float.NaN;
 		/// <summary>
 		/// HP normalized.
 		/// </summary>
