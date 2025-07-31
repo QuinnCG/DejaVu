@@ -254,12 +254,8 @@ namespace Quinn.PlayerSystem
 
 			var vertices = new Vector3[32];
 
-			Vector3 start = GetOriginPoint();
-			// Starts under things, but ends up on top of them.
-			start.z = 1f;
-
-			Vector3 end = _grabHand.transform.position;
-			end.z = -1f;
+			Vector2 start = GetOriginPoint();
+			Vector2 end = _grabHand.transform.position;
 
 			Vector3 perpDir = GetOriginPoint().DirectionTo(_grabHand.transform.position);
 			perpDir.Set(-perpDir.y, perpDir.x, 0f);
@@ -267,7 +263,10 @@ namespace Quinn.PlayerSystem
 			for (int i = 0; i < vertices.Length; i++)
 			{
 				float t = i / (float)(vertices.Length - 1);
+
 				Vector3 basePos = Vector3.Lerp(start, end, t);
+				// Start under player but go above afterwards.
+				basePos.z = (t < 0.5f) ? 0.1f : -0.1f;
 
 				// Perpendicular offset (appearance of elastic band shooting out).
 				Vector3 offset = Mathf.Sin(t * Mathf.PI * LineFrequencyFactor) * LineAmpFactor.Evaluate(normExtendElapsed) * LineAmpMultiplier * t * normGrabDst * perpDir;

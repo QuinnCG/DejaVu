@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Quinn.PlayerSystem
@@ -7,7 +9,26 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float AccelerationRate = 10f;
 		[SerializeField]
+		private float LinearDrag = 5f;
+
+		[Space]
+
+		[SerializeField]
+		private float AccelerationFactorWhileGrabbing = 1f;
+		[SerializeField]
+		private float DragFactorWhileGrabbing = 1f;
+
+		[Space]
+
+		[SerializeField]
 		private float DashForce = 12f;
+
+		[Space]
+
+		[SerializeField, Required, ChildGameObjectsOnly]
+		private Transform CameraTarget;
+		[SerializeField]
+		private float CamTargetPlayerToCursorBias = 0.3f;
 
 		private Rigidbody2D _rb;
 		private Grabber _grabber;
@@ -31,8 +52,24 @@ namespace Quinn.PlayerSystem
 				y = Input.GetAxis("Vertical")
 			}.normalized;
 
-			_rb.AddForce(moveDir * AccelerationRate);
+			UpdateDash(moveDir);
+			UpdateGrab();
+			UpdateMovement(moveDir);
+		}
 
+		private void LateUpdate()
+		{
+			UpdateCameraTarget();
+		}
+
+		private void UpdateMovement(Vector2 moveDir)
+		{
+			_rb.linearDamping = LinearDrag * (_grabber.IsGrabbing ? DragFactorWhileGrabbing : 1f);
+			_rb.AddForce((_grabber.IsGrabbing ? AccelerationFactorWhileGrabbing : 1f) * AccelerationRate * moveDir);
+		}
+
+		private void UpdateDash(Vector2 moveDir)
+		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				Cooldown.Call(this, 0.5f, () =>
@@ -40,7 +77,10 @@ namespace Quinn.PlayerSystem
 					_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
 				});
 			}
+		}
 
+		private void UpdateGrab()
+		{
 			if (Input.GetMouseButtonDown(1))
 			{
 				_grabber.Grab();
@@ -49,6 +89,14 @@ namespace Quinn.PlayerSystem
 			{
 				_grabber.Release();
 			}
+		}
+
+		private void UpdateCameraTarget()
+		{
+			Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			CameraTarget.position = Vector2.Lerp(transform.position, mousePos, CamTargetPlayerToCursorBias);
+
+			Draw.Sphere(CameraTarget.position, 0.2f, Color.azure, 0f, true);
 		}
 	}
 }
