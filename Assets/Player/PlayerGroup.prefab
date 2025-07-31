@@ -42,6 +42,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2359988316024314946}
     m_Modifications:
+    - target: {fileID: 402243408063040053, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: HandExtendDuration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006420988239529291, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: LineFrequencyFactor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5269309931406716933, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
       propertyPath: m_Name
       value: Player

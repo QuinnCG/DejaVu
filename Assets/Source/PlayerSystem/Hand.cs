@@ -14,8 +14,6 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float LineAmpMultiplier = 1f;
 		[SerializeField]
-		private float LineExtendDuration = 0.1f;
-		[SerializeField]
 		private int MinVertices = 12, MaxVertices = 32;
 
 		[Space]
@@ -39,7 +37,7 @@ namespace Quinn.PlayerSystem
 			DestroyHand();
 		}
 
-		public void UpdateHand(Vector2 start, Vector2 end, Quaternion rotation, float normProgress, bool isFist = true)
+		public void UpdateHand(Vector2 start, Vector2 end, Quaternion rotation, float normExtensionProgress, float normDstToEnd, bool isFist = true)
 		{
 			if (_handInstance == null)
 			{
@@ -49,8 +47,8 @@ namespace Quinn.PlayerSystem
 
 			_handRenderer.sprite = isFist ? ClosedHand : OpenHand;
 
-			UpdateHandTransform(end, rotation);
-			UpdateLineData(normProgress);
+			UpdateHandTransform(start, end, normExtensionProgress, rotation);
+			UpdateLineData(normExtensionProgress, normDstToEnd, start, end);
 		}
 
 		public void DestroyHand()
@@ -64,36 +62,37 @@ namespace Quinn.PlayerSystem
 			}
 		}
 
-		private void UpdateHandTransform(Vector2 pos, Quaternion rot)
+		private void UpdateHandTransform(Vector2 start, Vector2 end, float normExtensionProgress, Quaternion rot)
 		{
+			var pos = Vector2.Lerp(start, end, normExtensionProgress);
 			_handInstance.transform.SetPositionAndRotation(pos, rot);
 		}
 
-		private void UpdateLineData(float normProgress)
+		private void UpdateLineData(float normExtensionProgress, float normDstToEnd, Vector2 start, Vector2 end)
 		{
-			int vertexCount = Mathf.RoundToInt(Mathf.Lerp(MinVertices, MaxVertices, normProgress));
+			int vertexCount = Mathf.RoundToInt(Mathf.Lerp(MinVertices, MaxVertices, normDstToEnd));
+			vertexCount = MaxVertices;
 			var vertices = new Vector3[vertexCount];
 
-			Vector2 start = GetOriginPoint();
-			Vector2 end = _handInstance.transform.position;
-
-			Vector3 perpDir = GetOriginPoint().DirectionTo(_handInstance.transform.position);
-			perpDir.Set(-perpDir.y, perpDir.x, 0f);
+			Vector2 dir = start.DirectionTo(end);
+			var perpDir = new Vector3(-dir.y, dir.x);
 
 			for (int i = 0; i < vertices.Length; i++)
 			{
 				float t = i / (float)(vertices.Length - 1);
-				Vector3 basePos = Vector3.Lerp(start, end, t);
+				Vector3 basePos = Vector3.Lerp(start, _handInstance.transform.position, t);
 
-				// Perpendicular offset (appearance of elastic band shooting out).
-				Vector3 offset = Mathf.Sin(t * Mathf.PI * LineFrequencyFactor) * LineAmpFactor.Evaluate(normProgress) * LineAmpMultiplier * t * normProgress * perpDir;
+				float offsetMultiplier = LineAmpFactor.Evaluate(t) * LineAmpMultiplier;
+				offsetMultiplier *= 1f - normExtensionProgress;
+
+				Vector3 offset = Mathf.Sin(Mathf.PI * LineFrequencyFactor) * offsetMultiplier * perpDir;
 
 				vertices[i] = basePos + offset;
 			}
 
 			_line.positionCount = vertices.Length;
 			_line.SetPositions(vertices);
-			_line.widthCurve = GetLineWidthCurve(normProgress);
+			_line.widthCurve = GetLineWidthCurve(normDstToEnd);
 		}
 
 		private AnimationCurve GetLineWidthCurve(float normProgress)
@@ -105,7 +104,7 @@ namespace Quinn.PlayerSystem
 				outTangent = Mathf.Lerp(3f, -5f, t)
 			};
 
-			var mid = new Keyframe(0.5f, Mathf.Lerp(1.5f, 0.4f, t))
+			var mid = new Keyframe(0.5f, Mathf.Lerp(2f, 0.4f, t))
 			{
 				inTangent = 0f,
 				outTangent = 0f
@@ -117,11 +116,6 @@ namespace Quinn.PlayerSystem
 			};
 
 			return new AnimationCurve(start, mid, end);
-		}
-
-		private Vector2 GetOriginPoint()
-		{
-			return transform.position;
 		}
 	}
 }
