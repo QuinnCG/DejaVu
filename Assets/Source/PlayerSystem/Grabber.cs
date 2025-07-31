@@ -22,7 +22,22 @@ namespace Quinn.PlayerSystem
 		[Space]
 
 		[SerializeField]
-		private float HandExtendDuration = 0.2f;
+		private LineRenderer Line;
+		[SerializeField]
+		private AnimationCurve LineThicknessChangeOverDistance;
+		[SerializeField]
+		private float LineFrequencyFactor = 1f;
+		[SerializeField]
+		private AnimationCurve LineAmpFactor;
+		[SerializeField]
+		private float LineAmpMultiplier = 1f;
+		[SerializeField]
+		private float LineExtendDuration = 0.1f;
+
+		[Space]
+
+		[SerializeField, AssetsOnly]
+		private GameObject HandPrefab;
 
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound;
@@ -35,6 +50,7 @@ namespace Quinn.PlayerSystem
 
 		private Vector2 _grabPos, _desiredGrabPos;
 		private float _targetTetherDistance;
+		private GameObject _grabHand;
 
 		private float _nextAllowedGrabTime;
 		private float _grabStartTime;
@@ -72,10 +88,11 @@ namespace Quinn.PlayerSystem
 			if (IsGrabbing)
 			{
 				// 0-1 value starting when hand begins to extend and ending when it's fully extended.
-				float normExtendElapsed = (Time.time - _grabStartTime) / HandExtendDuration;
+				float normExtendElapsed = (Time.time - _grabStartTime) / LineExtendDuration;
 				normExtendElapsed = Mathf.Min(normExtendElapsed, 1f);
 
-				float normDst = transform.position.DistanceTo(_grabPos) / MaxGrabDistance;
+				UpdateHandTransform(normExtendElapsed);
+				UpdateLineData(normExtendElapsed);
 
 				// Hand is fully extended.
 				if (normExtendElapsed >= 1f && !_hasGrabReachedYet)
@@ -88,9 +105,6 @@ namespace Quinn.PlayerSystem
 						Release();
 					}
 				}
-
-				// Hand updates.
-				_hand.UpdateHand(GetOriginPoint(), _grabPos, GetHandRotation(), normExtendElapsed, normDst, _hasGrabReachedYet);
 			}
 		}
 
@@ -146,27 +160,14 @@ namespace Quinn.PlayerSystem
 					_grabSpring.distance = _targetTetherDistance;
 				}
 
+				CrosshairManager.Instance.Hide();
+
 				_grabStartTime = Time.time;
+				_grabHand = Instantiate(HandPrefab, GetOriginPoint(), GetHandRotation());
+
 				_hasGrabReachedYet = false;
 
-				CrosshairManager.Instance.Hide();
 				Audio.Play(GrabStartSound);
-			}
-		}
-
-		public void Release()
-		{
-			if (IsGrabbing)
-			{
-				IsGrabbing = false;
-
-				CrosshairManager.Instance.Show();
-				Audio.Play(GrabReleasedSound);
-
-				_nextAllowedGrabTime = Time.time + CooldownAfterRelease;
-				_grabSpring.enabled = false;
-
-				_hand.DestroyHand();
 			}
 		}
 
@@ -182,6 +183,23 @@ namespace Quinn.PlayerSystem
 		{
 			Vector2 end = _desiredGrabPos + (Vector2)(GetOriginPoint().DirectionTo(_desiredGrabPos) * 1f);
 			return Physics2D.Linecast(GetOriginPoint(), end, LayerMask.GetMask("Obstacle"));
+		}
+
+		public void Release()
+		{
+			if (IsGrabbing)
+			{
+				IsGrabbing = false;
+
+				CrosshairManager.Instance.Show();
+				Audio.Play(GrabReleasedSound);
+
+				_nextAllowedGrabTime = Time.time + CooldownAfterRelease;
+				_grabSpring.enabled = false;
+				Line.positionCount = 0;
+
+				_grabHand.Destroy();
+			}
 		}
 
 		private Quaternion GetHandRotation()
@@ -203,9 +221,72 @@ namespace Quinn.PlayerSystem
 			return (Vector2)GetOriginPoint() + clampedDiff;
 		}
 
+		private AnimationCurve GetLineWidthCurve()
+		{
+			float dstNorm = Mathf.Min(GetOriginPoint().DistanceTo(GetGrabPoint()) / MaxGrabDistance, 1f);
+			float t = LineThicknessChangeOverDistance.Evaluate(dstNorm);
+
+			var start = new Keyframe(0f, 1f)
+			{
+				outTangent = Mathf.Lerp(3f, -5f, t)
+			};
+
+			var mid = new Keyframe(0.5f, Mathf.Lerp(1.5f, 0.4f, t))
+			{
+				inTangent = 0f,
+				outTangent = 0f
+			};
+
+			var end = new Keyframe(1f, 1f)
+			{
+				inTangent = Mathf.Lerp(-3f, 5f, t)
+			};
+
+			return new AnimationCurve(start, mid, end);
+		}
+
 		private float GetDistanceToGrabPoint()
 		{
 			return GetOriginPoint().DistanceTo(GetGrabPoint());
+		}
+
+		private void UpdateLineData(float normExtendElapsed)
+		{
+			float normGrabDst = Mathf.Min(GetDistanceToGrabPoint() / MaxGrabDistance, 1f);
+
+			var vertices = new Vector3[32];
+
+			Vector2 start = GetOriginPoint();
+			Vector2 end = _grabHand.transform.position;
+
+			Vector3 perpDir = GetOriginPoint().DirectionTo(_grabHand.transform.position);
+			perpDir.Set(-perpDir.y, perpDir.x, 0f);
+
+			for (int i = 0; i < vertices.Length; i++)
+			{
+				float t = i / (float)(vertices.Length - 1);
+
+				Vector3 basePos = Vector3.Lerp(start, end, t);
+				// Start under player but go above afterwards.
+				basePos.z = (t < 0.5f) ? 0.1f : -0.1f;
+
+				// Perpendicular offset (appearance of elastic band shooting out).
+				Vector3 offset = Mathf.Sin(t * Mathf.PI * LineFrequencyFactor) * LineAmpFactor.Evaluate(normExtendElapsed) * LineAmpMultiplier * t * normGrabDst * perpDir;
+
+				vertices[i] = basePos + offset;
+			}
+
+			Line.positionCount = vertices.Length;
+			Line.SetPositions(vertices);
+			Line.widthCurve = GetLineWidthCurve();
+		}
+
+		private void UpdateHandTransform(float normExtendElapsed)
+		{
+			var handPos = Vector2.Lerp(_grabHand.transform.position, GetGrabPoint(), normExtendElapsed);
+			var handRot = GetHandRotation();
+
+			_grabHand.transform.SetPositionAndRotation(handPos, handRot);
 		}
 
 		private Vector2 GetOriginPoint()

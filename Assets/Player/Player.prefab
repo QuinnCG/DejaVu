@@ -403,7 +403,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  LineFrequencyFactor: 2
+  LineFrequencyFactor: 1
   LineAmpFactor:
     serializedVersion: 2
     m_Curve:
@@ -464,9 +464,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  LineAmpMultiplier: 99999
-  MinVertices: 24
-  MaxVertices: 32
+  LineAmpMultiplier: 1
+  LineExtendDuration: 0.1
   HandPrefab: {fileID: 1852794614287416250, guid: f3427975faa4d44448bdfb149827b7dd, type: 3}
   OpenHand: {fileID: 21300000, guid: 1f05ced8b808e70439ac05c8f418f325, type: 3}
   ClosedHand: {fileID: 21300000, guid: 67707618df215f443a6059500440920d, type: 3}
@@ -487,7 +486,95 @@ MonoBehaviour:
   VelocityReductionThreshold: 25
   VelocityDecayRate: 20
   CooldownAfterRelease: 0.15
-  HandExtendDuration: 0.2
+  Line: {fileID: 2741730318551483156}
+  LineThicknessChangeOverDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LineFrequencyFactor: 4
+  LineAmpFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 27.87551
+      outSlope: 27.87551
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.0648616
+    - serializedVersion: 3
+      time: 0.37149814
+      value: 0.9684948
+      inSlope: 0.41211432
+      outSlope: 0.41211432
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.48253876
+      outWeight: 0.33309212
+    - serializedVersion: 3
+      time: 0.49503314
+      value: 1.0669326
+      inSlope: 0.11177094
+      outSlope: 0.11177094
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.32888067
+      outWeight: 0.73146755
+    - serializedVersion: 3
+      time: 0.73714834
+      value: -0.26835412
+      inSlope: -0.042722363
+      outSlope: -0.042722363
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30538818
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.9258654
+      value: 0.1042369
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30573452
+      outWeight: 0.3571011
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.4060495
+      outSlope: -1.4060495
+      tangentMode: 34
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LineAmpMultiplier: 1
+  LineExtendDuration: 0.2
+  HandPrefab: {fileID: 1852794614287416250, guid: f3427975faa4d44448bdfb149827b7dd, type: 3}
   GrabStartSound:
     Guid:
       Data1: -442846422
