@@ -1,6 +1,7 @@
 using DG.Tweening;
 using FMOD.Studio;
 using FMODUnity;
+using QFSW.QC;
 using UnityEngine;
 
 namespace Quinn
@@ -43,22 +44,27 @@ namespace Quinn
 			_transitionSnapshot.release();
 		}
 
-		public async Awaitable FadeToBlackAsync(float duration)
+		public void FadeToBlack(float duration)
 		{
-			await Blackout.DOFade(1f, duration)
-				.SetEase(FadeToBlackEase)
-				.AsyncWaitForCompletion();
+			Blackout.alpha = 0f;
 
 			_transitionSnapshot.start();
+			Blackout.DOFade(1f, duration).SetEase(FadeToBlackEase);
 		}
 
-		public async Awaitable FadeFromBlackAsync(float duration)
+		public void FadeFromBlack(float duration)
 		{
-			_transitionSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			Blackout.alpha = 1f;
 
-			await Blackout.DOFade(0f, duration)
-				.SetEase(FadeFromBlackEase)
-				.AsyncWaitForCompletion();
+			_transitionSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			Blackout.DOFade(0f, duration).SetEase(FadeFromBlackEase);
+		}
+
+		[Command("fade")]
+		protected void SetFade(float norm)
+		{
+			Blackout.DOKill();
+			Blackout.alpha = Mathf.Clamp01(norm);
 		}
 	}
 }

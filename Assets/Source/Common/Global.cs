@@ -1,7 +1,6 @@
 using QFSW.QC;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.InputSystem;
 
 namespace Quinn
 {
@@ -15,14 +14,6 @@ namespace Quinn
 
 			instance.MakeTransient();
 			instance.name = "Globals";
-		}
-
-		private void Update()
-		{
-			if (Keyboard.current.f4Key.wasPressedThisFrame)
-			{
-				Debug.Break();
-			}
 		}
 
 		[Command("quit", "Exit out of the game.")]

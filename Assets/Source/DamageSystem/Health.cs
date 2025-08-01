@@ -122,7 +122,7 @@ namespace Quinn.DamageSystem
 			if (CanTakeDamage(info))
 			{
 				float actualDmgApplied = Mathf.Min(Current, info.Damage);
-				Current = Mathf.Max(Current - info.Damage);
+				Current = Mathf.Max(Current - info.Damage, 0f);
 
 				if (InfiniteHP)
 				{
@@ -139,7 +139,7 @@ namespace Quinn.DamageSystem
 				OnHealthChanged?.Invoke(actualDmgApplied);
 
 				// Death.
-				if (Current == 0f)
+				if (Current <= 0f)
 				{
 					IsDead = true;
 					OnDeath?.Invoke();

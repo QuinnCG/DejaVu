@@ -954,11 +954,11 @@ MonoBehaviour:
     Path: event:/Player/Tether/GrabRetracted
   PunchHitSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 286163252
+      Data2: 1137549718
+      Data3: -1475429978
+      Data4: -1371364983
+    Path: event:/Impact
 --- !u!114 &-8802311335246427373
 MonoBehaviour:
   m_ObjectHideFlags: 0
