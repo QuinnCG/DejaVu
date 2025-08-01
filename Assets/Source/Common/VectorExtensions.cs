@@ -79,5 +79,15 @@ namespace Quinn
 		{
 			return v.ToRadians().ToDegrees();
 		}
+
+		public static Vector2 Perpendicular1(this Vector2 vector)
+		{
+			return new Vector2(vector.y, -vector.x);
+		}
+
+		public static Vector2 Perpendicular2(this Vector2 vector)
+		{
+			return new Vector2(-vector.y, vector.x);
+		}
 	}
 }

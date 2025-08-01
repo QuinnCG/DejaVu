@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Quinn.DamageSystem
 {
+
 	public class Health : MonoBehaviour, IDamageable, ITeam
 	{
 		[SerializeField, Tooltip("The starting HP.")]
