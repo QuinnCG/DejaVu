@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: -876546973899608171, guid: ad35860f166ee5649b9cbfa1ae7ba4bb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -232,7 +232,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: -876546973899608171, guid: ad35860f166ee5649b9cbfa1ae7ba4bb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -420,8 +420,16 @@ PrefabInstance:
       value: Grunt
       objectReference: {fileID: 0}
     - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
+      propertyPath: FlashOnHurt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: DeathSound.Path
       value: event:/Enemies/Grunt/Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
+      propertyPath: Renderers.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: DeathSound.Guid.Data1
@@ -439,6 +447,18 @@ PrefabInstance:
       propertyPath: DeathSound.Guid.Data4
       value: 490189389
       objectReference: {fileID: 0}
+    - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
+      propertyPath: 'Renderers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6427339330349897012}
+    - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
+      propertyPath: 'Renderers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2401027143419083151}
+    - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
+      propertyPath: 'Renderers.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4708028485778236180}
     - target: {fileID: 8878458516625079171, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: m_Size.x
       value: 0.6566844
@@ -496,6 +516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 1308594979820062192}
+  IsBoss: 0
+  BossTitle: Boss Title
   PatrolRadius: 8
   PatrolAcceleration: 250
   PatrolStoppingDst: 0.5

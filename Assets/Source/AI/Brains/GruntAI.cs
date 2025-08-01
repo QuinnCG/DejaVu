@@ -60,6 +60,8 @@ namespace Quinn.AI.Brains
 				}
 			}
 
+			ShowBossUI();
+
 			Audio.Play(AlertSound, transform.position);
 			StartCoroutine(Chase());
 		}
@@ -74,7 +76,7 @@ namespace Quinn.AI.Brains
 				{
 					// TODO: Cast circle nearby us for duration in separate coroutine.
 
-					PushImpulse(DirToPlayer * LeapForce);
+					PushImpulse(DirToPlayerCenter * LeapForce);
 					Audio.Play(LeapSound, transform.position);
 					yield return new WaitForSeconds(LeapIdle.GetRandom());
 				}

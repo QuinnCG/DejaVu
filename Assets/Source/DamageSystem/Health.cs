@@ -51,7 +51,7 @@ namespace Quinn.DamageSystem
 		/// <summary>
 		/// HP normalized.
 		/// </summary>
-		[ShowInInspector]
+		[ShowInInspector, ReadOnly]
 		public float Normalized => Current / Max;
 
 		public bool IsDead { get; private set; }

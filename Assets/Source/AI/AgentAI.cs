@@ -1,5 +1,6 @@
 using Quinn.DamageSystem;
 using Quinn.PlayerSystem;
+using Quinn.UI;
 using Sirenix.OdinInspector;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -12,8 +13,15 @@ namespace Quinn.AI
 	[RequireComponent(typeof(Health))]
 	public abstract class AgentAI : MonoBehaviour
 	{
-		[SerializeField, Required]
+		[SerializeField, Required, BoxGroup("AgentAI")]
 		private Transform Root;
+
+		[Space]
+
+		[SerializeField, BoxGroup("AgentAI")]
+		private bool IsBoss;
+		[SerializeField, BoxGroup("AgentAI"), EnableIf(nameof(IsBoss))]
+		private string BossTitle = "Boss Title";
 
 		public Animator Animator { get; private set; }
 		protected Collider2D Collider { get; private set; }
@@ -24,6 +32,7 @@ namespace Quinn.AI
 		protected Player Player => Player.Instance;
 		protected Vector2 PlayerPos => Player.transform.position;
 		protected Vector2 DirToPlayer => transform.position.DirectionTo(PlayerPos);
+		protected Vector2 DirToPlayerCenter => transform.position.DirectionTo(Player.Collider.bounds.center);
 		protected float DstToPlayer => transform.position.DistanceTo(PlayerPos);
 		protected float PlayerHealthNorm => Player.Health.Normalized;
 		protected bool IsPlayerAlive => Player.Health.IsAlive;
@@ -93,6 +102,14 @@ namespace Quinn.AI
 		protected void FaceAwayFromPlayer()
 		{
 			FaceDirection(-DirToPlayer.x);
+		}
+
+		protected void ShowBossUI()
+		{
+			if (IsBoss)
+			{
+				BossUI.Instance.SetBoss(BossTitle, Health);
+			}
 		}
 	}
 }
