@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Quinn
 {
@@ -9,11 +8,6 @@ namespace Quinn
 		private Door[] Doors;
 
 		public bool IsLocked { get; private set; }
-
-		private void OnValidate()
-		{
-			Doors = GetComponentsInChildren<Door>();
-		}
 
 		public void Open()
 		{

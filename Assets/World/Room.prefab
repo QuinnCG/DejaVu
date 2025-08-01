@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6453217993603134371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4778168799043344222}
+  - component: {fileID: 6705099808658734697}
+  m_Layer: 0
+  m_Name: Room
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4778168799043344222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453217993603134371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7070227119846608999}
+  - {fileID: 3751963354732651796}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6705099808658734697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453217993603134371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb82bbeea6be18b40919ff1ae3aa5942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Doors:
+  - {fileID: 2068755049074791489}
+  - {fileID: 5384731823755698482}
+--- !u!1001 &2137823542380943926
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4778168799043344222}
+    m_Modifications:
+    - target: {fileID: 2374403031536660122, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_Name
+      value: Door 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+--- !u!114 &2068755049074791489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 80680989771386487, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+  m_PrefabInstance: {fileID: 2137823542380943926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ab51d37f7a91f4ab493b8a68baa78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &7070227119846608999 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+  m_PrefabInstance: {fileID: 2137823542380943926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5450705743672012613
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4778168799043344222}
+    m_Modifications:
+    - target: {fileID: 2374403031536660122, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_Name
+      value: Door 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+--- !u!4 &3751963354732651796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9202381485651200593, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+  m_PrefabInstance: {fileID: 5450705743672012613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5384731823755698482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 80680989771386487, guid: 2a1f45bf4dda94b44bf7249fb3dfa29d, type: 3}
+  m_PrefabInstance: {fileID: 5450705743672012613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ab51d37f7a91f4ab493b8a68baa78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
