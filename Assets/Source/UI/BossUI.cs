@@ -34,6 +34,10 @@ namespace Quinn.UI
 			{
 				Bar.fillAmount = _health.Normalized;
 			}
+			else
+			{
+				Bar.fillAmount = 0f;
+			}
 		}
 
 		public void SetBoss(string title, Health health)
