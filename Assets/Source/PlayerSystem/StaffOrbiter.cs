@@ -1,3 +1,4 @@
+using Quinn.DamageSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,6 +18,21 @@ namespace Quinn.PlayerSystem
 		private void Awake()
 		{
 			_grabber = GetComponent<Grabber>();
+
+			GetComponent<Health>().OnDeath += () =>
+			{
+				Staff.gameObject.SetActive(false);
+			};
+
+			Staff.transform.SetParent(null, true);
+		}
+
+		private void OnDestroy()
+		{
+			if (Staff != null)
+			{
+				Staff.gameObject.Destroy();
+			}
 		}
 
 		private void LateUpdate()

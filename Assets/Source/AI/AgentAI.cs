@@ -1,5 +1,7 @@
 using Quinn.DamageSystem;
 using Quinn.PlayerSystem;
+using Sirenix.OdinInspector;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace Quinn.AI
@@ -8,8 +10,11 @@ namespace Quinn.AI
 	[RequireComponent(typeof(Collider2D))]
 	[RequireComponent(typeof(Rigidbody2D))]
 	[RequireComponent(typeof(Health))]
-	public class AgentAI : MonoBehaviour
+	public abstract class AgentAI : MonoBehaviour
 	{
+		[SerializeField, Required]
+		private Transform Root;
+
 		public Animator Animator { get; private set; }
 		protected Collider2D Collider { get; private set; }
 		protected Rigidbody2D Rigidbody { get; private set; }
@@ -24,17 +29,24 @@ namespace Quinn.AI
 		protected bool IsPlayerAlive => Player.Health.IsAlive;
 		protected bool IsPlayerDeath => Player.Health.IsDead;
 
+		public bool DoesThink { get; set; } = true;
+
 		protected virtual void Awake()
 		{
 			Animator = GetComponent<Animator>();
 			Collider = GetComponent<Collider2D>();
 			Rigidbody = GetComponent<Rigidbody2D>();
 			Health = GetComponent<Health>();
+
+			Health.OnDeath += OnDeath;
 		}
 
 		protected virtual void Update()
 		{
-			OnThink();
+			if (DoesThink)
+			{
+				OnThink();
+			}
 		}
 
 		protected virtual void OnThink() { }
@@ -53,6 +65,34 @@ namespace Quinn.AI
 		protected void PushImpulse(Vector2 velocity)
 		{
 			Rigidbody.AddForce(velocity, ForceMode2D.Impulse);
+		}
+
+		protected void SetDrag(float drag)
+		{
+			Rigidbody.linearDamping = drag;
+		}
+
+		protected virtual void OnDeath()
+		{
+			gameObject.Destroy();
+		}
+
+		protected void FaceDirection(float xDir)
+		{
+			if (xDir != 0f)
+			{
+				var scale = Root.localScale;
+				scale.x = Mathf.Abs(scale.x) * Mathf.Sign(xDir);
+				Root.localScale = scale;
+			}
+		}
+		protected void FacePlayer()
+		{
+			FaceDirection(DirToPlayer.x);
+		}
+		protected void FaceAwayFromPlayer()
+		{
+			FaceDirection(-DirToPlayer.x);
 		}
 	}
 }

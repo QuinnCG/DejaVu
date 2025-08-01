@@ -13,6 +13,8 @@ namespace Quinn.PlayerSystem
 		private float MinAccelerationRate = 2f, MaxAccelerationRate = 16f;
 		[SerializeField]
 		private float LinearDrag = 5f;
+		[SerializeField]
+		private float AnimSpeedFactorMaxVel = 30f;
 
 		[Space]
 
@@ -112,7 +114,7 @@ namespace Quinn.PlayerSystem
 			float force = Mathf.Lerp(MinAccelerationRate, MaxAccelerationRate, norm);
 			force *= _grabber.IsGrabbing ? AccelerationFactorWhileGrabbing : 1f;
 
-			_rb.AddForce(force * moveDir);
+			_rb.AddForce(force * Time.deltaTime * moveDir);
 			_rb.linearDamping = LinearDrag * (_grabber.IsGrabbing ? DragFactorWhileGrabbing : 1f);
 		}
 
@@ -179,7 +181,7 @@ namespace Quinn.PlayerSystem
 
 		private void UpdateAnimation()
 		{
-			_animator.SetFloat("NormSpeed", _rb.linearVelocity.magnitude / MaxAccelerationRate);
+			_animator.SetFloat("NormSpeed", _rb.linearVelocity.magnitude / AnimSpeedFactorMaxVel);
 			_animator.SetBool("IsMoving", _rb.linearVelocity.sqrMagnitude > 0f);
 		}
 
