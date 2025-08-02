@@ -766,6 +766,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1727943988106643702, guid: 77d44dfbe29981b44802d79700627a09, type: 3}
+      propertyPath: LastLineWaitAddend
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727943988106643702, guid: 77d44dfbe29981b44802d79700627a09, type: 3}
       propertyPath: 'Lines.Array.data[0]'
       value: "Another fool \nwho'll never return."
       objectReference: {fileID: 0}
