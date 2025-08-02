@@ -11,6 +11,8 @@ namespace Quinn.AI.Brains
 		private float EngageDst = 5f;
 		[SerializeField]
 		private float ChaseSpeed = 500f;
+		[SerializeField]
+		private float Damage = 2f, Knockback = 12f;
 
 		[Space, SerializeField]
 		private float SpeakDst = 7f;
@@ -33,6 +35,14 @@ namespace Quinn.AI.Brains
 			yield return new WaitUntil(() => DstToPlayer < EngageDst || _takenAnyDamage || Time.time > speakEndTime);
 			ShowBossUI();
 			DoesThink = true;
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (collision.collider.IsPlayer())
+			{
+				ApplyDamage(collision.collider.GetComponent<IDamageable>(), Damage, Knockback * transform.position.DirectionTo(collision.collider.bounds.center));
+			}
 		}
 
 		private void LateUpdate()

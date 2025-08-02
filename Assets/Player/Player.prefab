@@ -784,6 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7374bde24ed4de34f975a79bb2ee789f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathDuration: 3
   MinAccelerationRate: 1000
   MaxAccelerationRate: 2500
   LinearDrag: 5
@@ -920,7 +921,7 @@ MonoBehaviour:
   ClosedHand: {fileID: 21300000, guid: 67707618df215f443a6059500440920d, type: 3}
   PunchRadius: 0.8
   PunchDamage: 10
-  PunchKnockback: 24
+  PunchKnockback: 32
   PunchCooldown: 0.8
   AdditionalPunchDistance: 1
   PunchSelfPush: 6

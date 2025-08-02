@@ -189,6 +189,70 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar
       objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_HasRenderer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_PreviousTrimEdge
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShadowShape2DProvider
+      value: 3389523934939709537
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_PreviousEdgeProcessing
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShadowMesh.m_InitialTrim
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].x
+      value: -1.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].y
+      value: -0.45261002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].x
+      value: -1.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].y
+      value: 3.7773895
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].x
+      value: 1.1249995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].y
+      value: 3.7773895
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].x
+      value: 1.1249995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].y
+      value: -0.45261002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_PreviousShadowCastingSource
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: m_PreviousShadowShape2DSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872208941212812432, guid: d44021c65f92b0541afb9b144946a081, type: 3}
+      propertyPath: 'managedReferences[3389523934939709537]'
+      value: Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.ShadowShape2DProvider_SpriteRenderer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
