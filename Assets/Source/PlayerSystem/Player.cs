@@ -1,7 +1,9 @@
+using FMOD.Studio;
 using FMODUnity;
 using QFSW.QC;
 using Quinn.DamageSystem;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -53,7 +55,7 @@ namespace Quinn.PlayerSystem
 		private Transform RootSprite;
 
 		[SerializeField, FoldoutGroup("SFX")]
-		private EventReference Footstep;
+		private EventReference Footstep, HurtSnapshot;
 
 		public Collider2D Collider { get; private set; }
 		public Health Health { get; private set; }
@@ -66,6 +68,8 @@ namespace Quinn.PlayerSystem
 		// Used for final sequence.
 		private bool _isInjured;
 
+		private EventInstance _hurtSnapshot;
+
 		private void Awake()
 		{
 			Instance = this;
@@ -73,11 +77,20 @@ namespace Quinn.PlayerSystem
 			Collider = GetComponent<Collider2D>();
 			Health = GetComponent<Health>();
 
+			Health.OnDamage += OnDamaged;
 			Health.OnDeath += OnDeath;
 
 			_animator = GetComponent<Animator>();
 			_rb = GetComponent<Rigidbody2D>();
 			_grabber = GetComponent<Grabber>();
+
+			_hurtSnapshot = Audio.Create(HurtSnapshot);
+		}
+
+		private void OnDamaged(DamageInstance instance)
+		{
+			_hurtSnapshot.start();
+			_hurtSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 		}
 
 		private void Start()
@@ -126,6 +139,12 @@ namespace Quinn.PlayerSystem
 				mag = Mathf.Max(0f, mag - (Time.deltaTime * 5f));
 				_rb.linearVelocity = _rb.linearVelocity.normalized * mag;
 			}
+		}
+
+		private void OnDestroy()
+		{
+			_hurtSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			_hurtSnapshot.release();
 		}
 
 		private void OnDeath()

@@ -55,5 +55,10 @@ namespace Quinn.AI.Brains
 			FacePlayer();
 			Push(ChaseSpeed * Time.deltaTime * DirToPlayer);
 		}
+
+		protected void Footstep_Anim()
+		{
+			Audio.Play("event:/Player/Footstep", transform.position);
+		}
 	}
 }

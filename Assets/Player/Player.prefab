@@ -810,6 +810,13 @@ MonoBehaviour:
       Data3: -1329200222
       Data4: -281454852
     Path: event:/Player/Footstep
+  HurtSnapshot:
+    Guid:
+      Data1: 1981081862
+      Data2: 1178355084
+      Data3: 1566841497
+      Data4: 1519562527
+    Path: snapshot:/Hurt
 --- !u!114 &402243408063040053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,9 +1013,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5fdd7f3f895c948850513e9b1ae119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Default: 20
+  Default: 8
   <Team>k__BackingField: 0
-  ImmunityOnHurt: 4
+  ImmunityOnHurt: 2
   FlashOnHurt: 1
   FlashDuration: 0.2
   FlashInEase: 1

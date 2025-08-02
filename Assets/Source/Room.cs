@@ -1,4 +1,5 @@
 using Quinn.DamageSystem;
+using Quinn.PlayerSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace Quinn
 						if (OpenUponDeath.Count == 0)
 						{
 							Open();
+							Player.Instance.Health.HealFully();
 						}
 					}
 				};
