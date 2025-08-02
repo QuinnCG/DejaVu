@@ -38,7 +38,7 @@ namespace Quinn
 
 		private void Awake()
 		{
-			_spawnedCheckpoints.Add(GUID, this);
+			_spawnedCheckpoints.TryAdd(GUID, this);
 		}
 
 		private void OnDestroy()
@@ -51,6 +51,10 @@ namespace Quinn
 			if (_spawnedCheckpoints.TryGetValue(guid, out Checkpoint checkpoint))
 			{
 				return checkpoint;
+			}
+			else
+			{
+				Log.Error($"'{_spawnedCheckpoints[guid].gameObject.name}' has a another checkpoint with the same GUID!");
 			}
 
 			return null;

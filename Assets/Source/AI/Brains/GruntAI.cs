@@ -1,7 +1,9 @@
 using FMODUnity;
+using Quinn.DamageSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Quinn.AI.Brains
 {
@@ -35,6 +37,12 @@ namespace Quinn.AI.Brains
 		private Vector2 LeapIdle = new(3f, 4f);
 		[SerializeField]
 		private EventReference LeapSound;
+		[SerializeField]
+		private float LeapHitboxDuration = 1f;
+		[SerializeField]
+		private float LeapDamage = 1f, LeapKnockback = 8f;
+
+		private float _leapEndTime;
 
 		private IEnumerator Start()
 		{
@@ -66,6 +74,14 @@ namespace Quinn.AI.Brains
 			StartCoroutine(Chase());
 		}
 
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (Time.time < _leapEndTime && collision.collider.IsPlayer())
+			{
+				ApplyDamage(collision.collider.GetComponent<IDamageable>(), LeapDamage, LeapKnockback * transform.position.DirectionTo(collision.collider.bounds.center));
+			}
+		}
+
 		private IEnumerator Chase()
 		{
 			while (true)
@@ -78,6 +94,8 @@ namespace Quinn.AI.Brains
 
 					PushImpulse(DirToPlayerCenter * LeapForce);
 					Audio.Play(LeapSound, transform.position);
+
+					_leapEndTime = Time.time + LeapHitboxDuration;
 					yield return new WaitForSeconds(LeapIdle.GetRandom());
 				}
 				else

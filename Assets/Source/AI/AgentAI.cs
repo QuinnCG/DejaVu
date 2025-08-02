@@ -110,5 +110,54 @@ namespace Quinn.AI
 				BossUI.Instance.SetBoss(BossTitle, Health);
 			}
 		}
+
+		protected bool ApplyDamage(IDamageable target, float damage, Vector2 knockback = default)
+		{
+			return target.TakeDamage(new DamageInfo()
+			{
+				Source = gameObject,
+				Owner = gameObject,
+				Damage = damage,
+				Direction = knockback.normalized,
+				Knockback = knockback.magnitude,
+				Team = Team.Hostile
+			});
+		}
+
+		protected bool DamageBox(Vector2 center, Vector2 size, float damage, Vector2 knockback = default)
+		{
+			bool hitAny = false;
+
+			foreach (var collider in Physics2D.OverlapBoxAll(center, size, 0f))
+			{
+				if (collider.TryGetComponent(out IDamageable dmg))
+				{
+					if (ApplyDamage(dmg, damage, knockback))
+					{
+						hitAny = true;
+					}
+				}
+			}
+
+			return hitAny;
+		}
+
+		protected bool DamageCircle(Vector2 center, float radius, float damage, Vector2 knockback = default)
+		{
+			bool hitAny = false;
+
+			foreach (var collider in Physics2D.OverlapCircleAll(center, radius))
+			{
+				if (collider.TryGetComponent(out IDamageable dmg))
+				{
+					if (ApplyDamage(dmg, damage, knockback))
+					{
+						hitAny = true;
+					}
+				}
+			}
+
+			return hitAny;
+		}
 	}
 }

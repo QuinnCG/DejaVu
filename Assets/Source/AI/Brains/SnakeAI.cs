@@ -1,3 +1,4 @@
+using Quinn.DamageSystem;
 using UnityEngine;
 
 namespace Quinn.AI.Brains
@@ -8,6 +9,11 @@ namespace Quinn.AI.Brains
 		private float ChaseSpeed = 500f;
 		[SerializeField]
 		private float SinFrequency = 1f;
+
+		[Space, SerializeField]
+		private float Damage = 1f;
+		[SerializeField]
+		private float Knockback = 6f;
 
 		[Space, SerializeField]
 		private Collider2D[] Colliders;
@@ -25,6 +31,14 @@ namespace Quinn.AI.Brains
 						Physics2D.IgnoreCollision(collider, other);
 					}
 				}
+			}
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (collision.collider.IsPlayer())
+			{
+				ApplyDamage(collision.collider.GetComponent<IDamageable>(), Damage, Knockback * transform.position.DirectionTo(collision.collider.bounds.center));
 			}
 		}
 

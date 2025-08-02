@@ -2,6 +2,7 @@ using DG.Tweening;
 using FMODUnity;
 using Sirenix.OdinInspector;
 using System.Collections;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -47,7 +48,11 @@ namespace Quinn.DamageSystem
 			}
 		}
 
-		public void Speak(params string[] lines)
+		/// <summary>
+		/// Speaks the lines.
+		/// </summary>
+		/// <returns>The total duration of the sequence.</returns>
+		public float Speak(params string[] lines)
 		{
 			StopAllCoroutines();
 			TextBlock.text = string.Empty;
@@ -56,6 +61,8 @@ namespace Quinn.DamageSystem
 
 			Group.DOKill();
 			Group.DOFade(1f, FadeInDuration);
+
+			return (lines.Length * LineInterval) + (lines.Sum(l => l.Length) * CharacterInterval);
 		}
 
 		public void Speak()
@@ -77,10 +84,9 @@ namespace Quinn.DamageSystem
 		{
 			yield return new WaitForSeconds(FirstLineDelay);
 
-			var builder = new StringBuilder();
-
 			for (int i = 0; i < lines.Length; i++)
 			{
+				var builder = new StringBuilder();
 				string line = lines[i];
 
 				for (int j = 0; j < line.Length; j++)

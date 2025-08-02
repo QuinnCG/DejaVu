@@ -1,3 +1,5 @@
+using Quinn.DamageSystem;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Quinn
@@ -5,9 +7,30 @@ namespace Quinn
 	public class Room : MonoBehaviour
 	{
 		[SerializeField]
+		private List<Health> OpenUponDeath;
+		[SerializeField]
 		private Door[] Doors;
 
 		public bool IsLocked { get; private set; }
+
+		private void Awake()
+		{
+			foreach (var hp in OpenUponDeath)
+			{
+				hp.OnDeath += () =>
+				{
+					if (OpenUponDeath.Count > 0)
+					{
+						OpenUponDeath.Remove(hp);
+
+						if (OpenUponDeath.Count == 0)
+						{
+							Open();
+						}
+					}
+				};
+			}
+		}
 
 		public void Open()
 		{

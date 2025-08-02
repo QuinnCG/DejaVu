@@ -63,6 +63,8 @@ namespace Quinn.PlayerSystem
 		private Grabber _grabber;
 
 		private float _nextAllowedDashTime;
+		// Used for final sequence.
+		private bool _isInjured;
 
 		private void Awake()
 		{
@@ -225,6 +227,7 @@ namespace Quinn.PlayerSystem
 		{
 			_animator.SetFloat("NormSpeed", _rb.linearVelocity.magnitude / AnimSpeedFactorMaxVel);
 			_animator.SetBool("IsMoving", _rb.linearVelocity.sqrMagnitude > 0f);
+			_animator.SetBool("IsInjured", _isInjured);
 		}
 
 		protected void Footstep_Anim()
