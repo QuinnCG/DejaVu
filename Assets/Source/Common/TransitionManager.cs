@@ -2,6 +2,7 @@ using DG.Tweening;
 using FMOD.Studio;
 using FMODUnity;
 using QFSW.QC;
+using System.Collections;
 using UnityEngine;
 
 namespace Quinn
@@ -17,11 +18,6 @@ namespace Quinn
 		private bool StartBlack;
 		[SerializeField]
 		private CanvasGroup Blackout;
-
-		[Space, SerializeField]
-		private Ease FadeToBlackEase = Ease.InCubic;
-		[SerializeField]
-		private Ease FadeFromBlackEase = Ease.OutCubic;
 
 		// This snapshot mutes most sound channels, but leaves music and reverb playing.
 		private EventInstance _transitionSnapshot;
@@ -46,18 +42,40 @@ namespace Quinn
 
 		public void FadeToBlack(float duration)
 		{
-			Blackout.alpha = 0f;
+			StopAllCoroutines();
+			StartCoroutine(FadeToBlackSequence(duration));
 
 			_transitionSnapshot.start();
-			Blackout.DOFade(1f, duration).SetEase(FadeToBlackEase);
 		}
 
 		public void FadeFromBlack(float duration)
 		{
-			Blackout.alpha = 1f;
+			StopAllCoroutines();
+			StartCoroutine(FadeFromBlackSequence(duration));
 
 			_transitionSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-			Blackout.DOFade(0f, duration).SetEase(FadeFromBlackEase);
+		}
+
+		private IEnumerator FadeToBlackSequence(float duration)
+		{
+			Blackout.alpha = 0f;
+
+			for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
+			{
+				Blackout.alpha = Mathf.Lerp(0f, 1f, t);
+				yield return null;
+			}
+		}
+
+		private IEnumerator FadeFromBlackSequence(float duration)
+		{
+			Blackout.alpha = 1f;
+
+			for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
+			{
+				Blackout.alpha = Mathf.Lerp(1f, 0f, t);
+				yield return null;
+			}
 		}
 
 		[Command("fade")]

@@ -1,13 +1,21 @@
 using FMODUnity;
+using QFSW.QC;
 using Quinn.DamageSystem;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Quinn.PlayerSystem
 {
 	public class Player : MonoBehaviour
 	{
 		public static Player Instance { get; private set; }
+
+		[SerializeField]
+		private float DeathDuration = 3f;
+
+		[Space]
 
 		[SerializeField]
 		private float MinAccelerationRate = 2f, MaxAccelerationRate = 16f;
@@ -61,13 +69,29 @@ namespace Quinn.PlayerSystem
 			Collider = GetComponent<Collider2D>();
 			Health = GetComponent<Health>();
 
+			Health.OnDeath += OnDeath;
+
 			_animator = GetComponent<Animator>();
 			_rb = GetComponent<Rigidbody2D>();
 			_grabber = GetComponent<Grabber>();
 		}
 
+		private void Start()
+		{
+			if (!string.IsNullOrWhiteSpace(Checkpoint.ActiveCheckpoint))
+			{
+				var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
+				transform.position = checkpoint.SpawnPoint.position;
+			}
+
+			TransitionManager.Instance.FadeFromBlack(2f);
+		}
+
 		private void Update()
 		{
+			if (Health.IsDead)
+				return;
+
 			Vector2 moveDir = new Vector2()
 			{
 				x = Input.GetAxis("Horizontal"),
@@ -96,6 +120,24 @@ namespace Quinn.PlayerSystem
 				mag = Mathf.Max(0f, mag - (Time.deltaTime * 5f));
 				_rb.linearVelocity = _rb.linearVelocity.normalized * mag;
 			}
+		}
+
+		private void OnDeath()
+		{
+			_rb.linearVelocity = Vector2.zero;
+
+			StopAllCoroutines();
+			StartCoroutine(DeathSequence());
+		}
+
+		private IEnumerator DeathSequence()
+		{
+			_animator.SetTrigger("Death");
+
+			TransitionManager.Instance.FadeToBlack(DeathDuration);
+			yield return new WaitForSeconds(DeathDuration);
+
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 
 		private void UpdateMovement(Vector2 moveDir)
@@ -183,6 +225,12 @@ namespace Quinn.PlayerSystem
 		protected void Footstep_Anim()
 		{
 			Audio.Play(Footstep, transform.position);
+		}
+
+		[Command("kill")]
+		protected void Kill_Cmd()
+		{
+			Health.Kill();
 		}
 	}
 }
