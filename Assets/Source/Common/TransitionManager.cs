@@ -58,8 +58,6 @@ namespace Quinn
 
 		private IEnumerator FadeToBlackSequence(float duration)
 		{
-			Blackout.alpha = 0f;
-
 			for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
 			{
 				Blackout.alpha = Mathf.Lerp(0f, 1f, t);
@@ -69,8 +67,6 @@ namespace Quinn
 
 		private IEnumerator FadeFromBlackSequence(float duration)
 		{
-			Blackout.alpha = 1f;
-
 			for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
 			{
 				Blackout.alpha = Mathf.Lerp(1f, 0f, t);

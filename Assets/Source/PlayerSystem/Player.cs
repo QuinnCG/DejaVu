@@ -62,6 +62,8 @@ namespace Quinn.PlayerSystem
 		private Rigidbody2D _rb;
 		private Grabber _grabber;
 
+		private float _nextAllowedDashTime;
+
 		private void Awake()
 		{
 			Instance = this;
@@ -78,6 +80,8 @@ namespace Quinn.PlayerSystem
 
 		private void Start()
 		{
+			CrosshairManager.Instance.Show();
+
 			if (!string.IsNullOrWhiteSpace(Checkpoint.ActiveCheckpoint))
 			{
 				var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
@@ -126,6 +130,8 @@ namespace Quinn.PlayerSystem
 		{
 			_rb.linearVelocity = Vector2.zero;
 
+			CrosshairManager.Instance.Hide();
+
 			StopAllCoroutines();
 			StartCoroutine(DeathSequence());
 		}
@@ -157,13 +163,12 @@ namespace Quinn.PlayerSystem
 
 		private void UpdateDash(Vector2 moveDir)
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextAllowedDashTime)
 			{
-				Cooldown.Call(this, DashCooldown, () =>
-				{
-					_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
-					Audio.Play(DashSound, transform.position);
-				});
+				_nextAllowedDashTime = Time.time + DashCooldown;
+
+				_rb.AddForce(moveDir * DashForce, ForceMode2D.Impulse);
+				Audio.Play(DashSound, transform.position);
 			}
 		}
 

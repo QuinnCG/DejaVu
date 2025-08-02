@@ -1,3 +1,4 @@
+using FMODUnity;
 using QFSW.QC;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -6,6 +7,9 @@ namespace Quinn
 {
 	public class Global : MonoBehaviour
 	{
+		[SerializeField]
+		private EventReference[] PlayAtGameStart;
+
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void Bootstrap()
 		{
@@ -14,6 +18,14 @@ namespace Quinn
 
 			instance.MakeTransient();
 			instance.name = "Globals";
+		}
+
+		private void Start()
+		{
+			foreach (var sound in PlayAtGameStart)
+			{
+				Audio.Play(sound);
+			}
 		}
 
 		[Command("quit", "Exit out of the game.")]
