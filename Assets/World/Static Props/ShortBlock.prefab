@@ -10,51 +10,119 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 695691398979742760, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Name
-      value: Pillar
+      value: ShortBlock
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_HasRenderer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_PreviousTrimEdge
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShadowShape2DProvider
+      value: 3389523915242995795
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_PreviousEdgeProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShadowMesh.m_InitialTrim
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].x
+      value: -1.4150009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].y
+      value: -2.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].x
+      value: -1.4150009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].y
+      value: 2.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].x
+      value: 1.4150009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].y
+      value: 2.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].x
+      value: 1.4150009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].y
+      value: -2.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_PreviousShadowCastingSource
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_PreviousShadowShape2DSource
+      value: 
+      objectReference: {fileID: 3826363102824774327}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.y
-      value: 1.6623917
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.x
-      value: 1.0249939
+      value: 1.3149872
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.y
-      value: 2.0149918
+      value: 2.2599792
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: 'managedReferences[3389523915242995794]'
+      value: Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.ShadowShape2DProvider_SpriteRenderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: 'managedReferences[3389523915242995795]'
+      value: Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.ShadowShape2DProvider_SpriteRenderer
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Size.x
-      value: 2.25
+      value: 2.83
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Size.y
-      value: 3.2022
+      value: 4.72
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Offset.y
-      value: 1.14849
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.107
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.25
+      value: 2.83
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 4.23
+      value: 4.72
       objectReference: {fileID: 0}
     - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.193
+      value: 0.2517492
       objectReference: {fileID: 0}
     - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.16915797
+      value: 0.13515878
       objectReference: {fileID: 0}
     - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.228
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 7688377411054101935, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalPosition.x
@@ -107,9 +175,14 @@ PrefabInstance:
     - target: {fileID: 8118793980266670093, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 21065dd377e0789458c8736ea82e3e0e, type: 3}
+      objectReference: {fileID: 21300000, guid: bef93306a8444224ba84ce9bd0578a91, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+--- !u!212 &3826363102824774327 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8118793980266670093, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+  m_PrefabInstance: {fileID: 5022139086573916858}
+  m_PrefabAsset: {fileID: 0}

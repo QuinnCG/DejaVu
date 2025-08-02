@@ -182,6 +182,7 @@ MonoBehaviour:
   OpenEase: 4
   CloseEase: 2
   OpenPosition: {fileID: 1589046677825685960}
+  IntermediateOpenPosition: {fileID: 0}
   OpeningSound:
     Guid:
       Data1: 0
@@ -208,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589046677825685960}
   m_Layer: 3
-  m_Name: ClosedPos
+  m_Name: OpenPos
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

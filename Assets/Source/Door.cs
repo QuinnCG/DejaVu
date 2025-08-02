@@ -21,6 +21,8 @@ namespace Quinn
 
 		[Space, Required, SerializeField]
 		private Transform OpenPosition;
+		[SerializeField]
+		private Transform IntermediateOpenPosition;
 
 		[SerializeField, FoldoutGroup("FX")]
 		private EventReference OpeningSound, ClosedSound;
@@ -31,7 +33,7 @@ namespace Quinn
 
 		private Rigidbody2D _rb;
 
-		private Vector2 _openPos;
+		private Vector2 _openPos, _openInterPos;
 		private Vector2 _closePos;
 
 		private void Awake()
@@ -40,6 +42,11 @@ namespace Quinn
 
 			_openPos = OpenPosition.position;
 			_closePos = _rb.position;
+
+			if (IntermediateOpenPosition != null)
+			{
+				_openInterPos = IntermediateOpenPosition.position;
+			}
 
 			if (!StartClosed)
 			{
@@ -55,9 +62,18 @@ namespace Quinn
 				return;
 
 			IsOpen = true;
-
 			_rb.DOKill();
-			_rb.DOMove(_openPos, OpenDuration).SetEase(OpenEase);
+
+			if (IntermediateOpenPosition != null)
+			{
+				var seq = DOTween.Sequence();
+				seq.Append(_rb.DOMove(_openInterPos, OpenDuration).SetEase(OpenEase));
+				seq.Append(_rb.DOMove(_openPos, OpenDuration).SetEase(OpenEase));
+			}
+			else
+			{
+				_rb.DOMove(_openPos, OpenDuration).SetEase(OpenEase);
+			}
 
 			if (OpeningVFX != null)
 			{
@@ -75,7 +91,16 @@ namespace Quinn
 			IsOpen = false;
 
 			_rb.DOKill();
-			_rb.DOMove(_closePos, CloseDuration)
+			
+			if (IntermediateOpenPosition != null)
+			{
+				var seq = DOTween.Sequence();
+				seq.Append(_rb.DOMove(_openInterPos, CloseDuration).SetEase(CloseEase));
+				seq.Append(_rb.DOMove(_closePos, CloseDuration).SetEase(CloseEase));
+			}
+			else
+			{
+				_rb.DOMove(_closePos, CloseDuration)
 				.SetEase(CloseEase)
 				.OnComplete(() =>
 				{
@@ -86,6 +111,7 @@ namespace Quinn
 						ClosedVFX.Play();
 					}
 				});
+			}
 		}
 	}
 }
