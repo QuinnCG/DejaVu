@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 695691398979742760, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_Name
-      value: Wall (10x) Variant
+      value: Wall (10x)
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.y
@@ -47,6 +47,22 @@ PrefabInstance:
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 3.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.987048
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22285713
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581292980953374627, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5657
       objectReference: {fileID: 0}
     - target: {fileID: 7688377411054101935, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_LocalPosition.x

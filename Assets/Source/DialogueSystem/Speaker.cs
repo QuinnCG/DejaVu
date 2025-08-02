@@ -12,6 +12,8 @@ namespace Quinn.DamageSystem
 	{
 		[SerializeField]
 		private float CharacterInterval = 0.05f, LineInterval = 1f, LastLineWaitAddend = 1f;
+		[SerializeField]
+		private float FirstLineDelay;
 
 		[SerializeField, Space]
 		private float FadeInDuration = 0.1f;
@@ -65,8 +67,16 @@ namespace Quinn.DamageSystem
 			}
 		}
 
+		public void End()
+		{
+			StopAllCoroutines();
+			Group.DOFade(0f, FadeOutDuration);
+		}
+
 		private IEnumerator Sequence(string[] lines)
 		{
+			yield return new WaitForSeconds(FirstLineDelay);
+
 			var builder = new StringBuilder();
 
 			for (int i = 0; i < lines.Length; i++)
@@ -86,7 +96,7 @@ namespace Quinn.DamageSystem
 			}
 
 			yield return new WaitForSeconds(LastLineWaitAddend);
-			Group.DOFade(0f, FadeOutDuration);
+			End();
 		}
 	}
 }
