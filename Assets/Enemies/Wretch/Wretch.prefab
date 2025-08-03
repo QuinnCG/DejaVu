@@ -93,6 +93,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5444001116622891783, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
+      propertyPath: PlayHurtOnDeathToo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444001116622891783, guid: d16b5cc20ab1ce04a97fe56231e7a91a, type: 3}
       propertyPath: HurtSound.Guid.Data1
       value: 2080405136
       objectReference: {fileID: 0}
@@ -240,6 +244,8 @@ MonoBehaviour:
   BossTitle: Mindless Wretch
   EngageDst: 5
   ChaseSpeed: 500
+  Damage: 2
+  Knockback: 12
   SpeakDst: 7
   Speaker: {fileID: 2018378181817033453}
   OpeningDialogue:

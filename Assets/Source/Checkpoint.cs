@@ -11,6 +11,8 @@ namespace Quinn
 
 		[field: SerializeField, Required]
 		public Transform SpawnPoint { get; private set; }
+		[SerializeField]
+		private bool IsStartingCheckpoint;
 		[SerializeField, ReadOnly]
 		private string GUID;
 
@@ -55,6 +57,19 @@ namespace Quinn
 			else
 			{
 				Log.Error($"'{_spawnedCheckpoints[guid].gameObject.name}' has a another checkpoint with the same GUID!");
+			}
+
+			return null;
+		}
+
+		public static Checkpoint GetStartingCheckpoint()
+		{
+			foreach (var checkpoint in _spawnedCheckpoints.Values)
+			{
+				if (checkpoint.IsStartingCheckpoint)
+				{
+					return checkpoint;
+				}
 			}
 
 			return null;

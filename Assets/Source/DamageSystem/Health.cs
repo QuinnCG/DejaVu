@@ -189,9 +189,9 @@ namespace Quinn.DamageSystem
 			}
 		}
 
-		public bool Kill()
+		public void Kill()
 		{
-			return TakeDamage(new DamageInfo()
+			TakeDamage(new DamageInfo()
 			{
 				Damage = Max + 1f,
 				Source = gameObject,

@@ -32,8 +32,6 @@ namespace Quinn.AI.Brains
 			Staff.SetManualDirection(DirToPlayerCenter);
 			FacePlayer();
 
-			Push(100f * Time.deltaTime * DirToPlayer);
-
 			if (Time.time > _nextPunchTime)
 			{
 				_nextPunchTime = Time.time + PunchCooldown;

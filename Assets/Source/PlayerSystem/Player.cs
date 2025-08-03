@@ -18,9 +18,14 @@ namespace Quinn.PlayerSystem
 		/// Set to true, when the player is fighting the Fake Player.
 		/// </summary>
 		public static bool IsFinalDeath { get; set; }
+		public static bool IsFirstSpawn { get; private set; } = true;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void StaticReset() => IsFinalDeath = false;
+		private static void StaticReset()
+		{
+			IsFirstSpawn = true;
+			IsFinalDeath = false;
+		}
 
 		[SerializeField]
 		private float DeathDuration = 3f;
@@ -101,15 +106,18 @@ namespace Quinn.PlayerSystem
 
 		private void Start()
 		{
+			if (IsFirstSpawn)
+			{
+				IsFirstSpawn = false;
+				Checkpoint.GetStartingCheckpoint().SetActiveCheckpoint();
+			}
+
 			if (!IsFinalDeath)
 			{
 				CrosshairManager.Instance.Show();
 
-				if (!string.IsNullOrWhiteSpace(Checkpoint.ActiveCheckpoint))
-				{
-					var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
-					transform.position = checkpoint.SpawnPoint.position;
-				}
+				var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
+				transform.position = checkpoint.SpawnPoint.position;
 			}
 
 			TransitionManager.Instance.FadeFromBlack(2f);
@@ -117,19 +125,20 @@ namespace Quinn.PlayerSystem
 
 		private void Update()
 		{
-			if (Health.IsDead)
-				return;
-
 			Vector2 moveDir = new Vector2()
 			{
 				x = Input.GetAxis("Horizontal"),
 				y = Input.GetAxis("Vertical")
 			}.normalized;
 
+			UpdateMovement(moveDir);
+
+			if (Health.IsDead)
+				return;
+
 			UpdateDash(moveDir);
 			UpdateGrab();
 			UpdatePunch();
-			UpdateMovement(moveDir);
 		}
 
 		private void LateUpdate()
@@ -164,7 +173,10 @@ namespace Quinn.PlayerSystem
 			}
 
 			Hat.DOFade(0f, 5f)
-				.OnComplete(() => Hat.enabled = false);
+				.OnComplete(() =>
+				{
+					Hat.gameObject.SetActive(false);
+				});
 		}
 
 		private void OnDamaged(DamageInstance instance)
@@ -183,12 +195,15 @@ namespace Quinn.PlayerSystem
 			StartCoroutine(DeathSequence());
 		}
 
-		private IEnumerator DeathSequence()
+		private IEnumerator DeathSequence(bool skip = false)
 		{
-			_animator.SetTrigger("Death");
+			if (!skip)
+			{
+				_animator.SetTrigger("Death");
 
-			TransitionManager.Instance.FadeToBlack(DeathDuration);
-			yield return new WaitForSeconds(DeathDuration);
+				TransitionManager.Instance.FadeToBlack(DeathDuration);
+				yield return new WaitForSeconds(DeathDuration);
+			}
 
 			if (IsFinalDeath)
 			{

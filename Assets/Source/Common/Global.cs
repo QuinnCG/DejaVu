@@ -2,6 +2,7 @@ using FMODUnity;
 using QFSW.QC;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 namespace Quinn
 {
@@ -26,6 +27,8 @@ namespace Quinn
 			{
 				Audio.Play(sound);
 			}
+
+			SceneManager.LoadScene(0);
 		}
 
 		[Command("quit", "Exit out of the game.")]
