@@ -51,6 +51,8 @@ namespace Quinn.UI
 
 			Group.DOKill();
 			Group.DOFade(1f, FadeInDuration);
+
+			Audio.SetGlobalParameter("boss-music", true);
 		}
 
 		public void ClearBoss()
@@ -59,6 +61,8 @@ namespace Quinn.UI
 			Group.DOFade(0f, FadeOutDuration);
 
 			_health = null;
+
+			Audio.SetGlobalParameter("boss-music", false);
 		}
 	}
 }
