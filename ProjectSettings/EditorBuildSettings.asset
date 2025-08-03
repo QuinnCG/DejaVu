@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/World/Game.unity
     guid: 36f50ad3ed526b544aea5f8c3ef7242b
+  - enabled: 1
+    path: Assets/World/End.unity
+    guid: 8f8785210970b1240a718e4ea38fe5f0
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e02380bcbb5e1f844a5ab70a58195357, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

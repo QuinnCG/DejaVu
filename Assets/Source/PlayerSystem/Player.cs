@@ -13,6 +13,13 @@ namespace Quinn.PlayerSystem
 	public class Player : MonoBehaviour
 	{
 		public static Player Instance { get; private set; }
+		/// <summary>
+		/// Set to true, when the player is fighting the Fake Player.
+		/// </summary>
+		public static bool IsFinalDeath { get; set; }
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void StaticReset() => IsFinalDeath = false;
 
 		[SerializeField]
 		private float DeathDuration = 3f;
@@ -87,20 +94,17 @@ namespace Quinn.PlayerSystem
 			_hurtSnapshot = Audio.Create(HurtSnapshot);
 		}
 
-		private void OnDamaged(DamageInstance instance)
-		{
-			_hurtSnapshot.start();
-			_hurtSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-		}
-
 		private void Start()
 		{
-			CrosshairManager.Instance.Show();
-
-			if (!string.IsNullOrWhiteSpace(Checkpoint.ActiveCheckpoint))
+			if (!IsFinalDeath)
 			{
-				var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
-				transform.position = checkpoint.SpawnPoint.position;
+				CrosshairManager.Instance.Show();
+
+				if (!string.IsNullOrWhiteSpace(Checkpoint.ActiveCheckpoint))
+				{
+					var checkpoint = Checkpoint.GetCheckpoint(Checkpoint.ActiveCheckpoint);
+					transform.position = checkpoint.SpawnPoint.position;
+				}
 			}
 
 			TransitionManager.Instance.FadeFromBlack(2f);
@@ -147,6 +151,12 @@ namespace Quinn.PlayerSystem
 			_hurtSnapshot.release();
 		}
 
+		private void OnDamaged(DamageInstance instance)
+		{
+			_hurtSnapshot.start();
+			_hurtSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		}
+
 		private void OnDeath()
 		{
 			_rb.linearVelocity = Vector2.zero;
@@ -164,7 +174,14 @@ namespace Quinn.PlayerSystem
 			TransitionManager.Instance.FadeToBlack(DeathDuration);
 			yield return new WaitForSeconds(DeathDuration);
 
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			if (IsFinalDeath)
+			{
+				SceneManager.LoadScene(1);
+			}
+			else
+			{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			}
 		}
 
 		private void UpdateMovement(Vector2 moveDir)

@@ -31,7 +31,7 @@ namespace Quinn.UI
 
 			Player.Instance.Health.OnHeal += _ =>
 			{
-				if (Group.alpha >= 1f)
+				if (Group.alpha >= 1f && Player.Instance.Health.Normalized == 1f)
 				{
 					Group.DOKill();
 					Group.DOFade(0f, 1f);

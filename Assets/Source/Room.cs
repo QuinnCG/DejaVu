@@ -11,6 +11,8 @@ namespace Quinn
 		private List<Health> OpenUponDeath;
 		[SerializeField]
 		private Door[] Doors;
+		[SerializeField]
+		private bool HealPlayerAfterwards = true;
 
 		public bool IsLocked { get; private set; }
 
@@ -27,7 +29,11 @@ namespace Quinn
 						if (OpenUponDeath.Count == 0)
 						{
 							Open();
-							Player.Instance.Health.HealFully();
+							
+							if (HealPlayerAfterwards)
+							{
+								Player.Instance.Health.HealFully();
+							}
 						}
 					}
 				};

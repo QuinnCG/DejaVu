@@ -60,6 +60,8 @@ namespace Quinn
 			return null;
 		}
 
+		public static void ClearActive() => ActiveCheckpoint = null;
+
 		public void SetActiveCheckpoint()
 		{
 			ActiveCheckpoint = GUID;

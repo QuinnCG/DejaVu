@@ -47,6 +47,8 @@ namespace Quinn.PlayerSystem
 		private Sprite OpenHand, ClosedHand;
 		[SerializeField]
 		private float PunchRadius = 0.5f, PunchDamage = 10f, PunchKnockback = 12f, PunchCooldown = 1f, AdditionalPunchDistance = 2f, PunchSelfPush = 6f;
+		[SerializeField]
+		private Team Team = Team.Friendly;
 
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference GrabStartSound, GrabReachedSound, GrabReleasedSound, GrabRetractedSound, PunchHitSound;
@@ -125,7 +127,7 @@ namespace Quinn.PlayerSystem
 			}
 		}
 
-		public void Grab()
+		public void Grab(Vector2? overrideGrabPos = null)
 		{
 			if (!IsGrabbing && Time.time >= _nextAllowedGrabTime)
 			{
@@ -133,6 +135,10 @@ namespace Quinn.PlayerSystem
 				_grabbedRB = null;
 
 				_desiredGrabPos = GetCursorWorldPos();
+				if (overrideGrabPos.HasValue)
+				{
+					_desiredGrabPos = overrideGrabPos.Value;
+				}
 				_grabPos = GetGrabPoint(_desiredGrabPos);
 
 				RaycastHit2D hit;
@@ -207,13 +213,13 @@ namespace Quinn.PlayerSystem
 			}
 		}
 
-		public void Punch()
+		public void Punch(Vector2? overridePunchPos = null)
 		{
 			if (Time.time > _nextAllowedPunchTime)
 			{
 				_nextAllowedPunchTime = Time.time + PunchCooldown;
 
-				Grab();
+				Grab(overridePunchPos);
 				_isPunching = true;
 
 				ApplyPunchDamage();
@@ -242,7 +248,7 @@ namespace Quinn.PlayerSystem
 						Owner = gameObject,
 						Direction = dir,
 						Knockback = PunchKnockback,
-						Team = Team.Friendly
+						Team = Team
 					});
 
 					if (success)
@@ -284,10 +290,10 @@ namespace Quinn.PlayerSystem
 
 		private Vector2 GetGrabPoint(Vector2 desiredPos)
 		{
-			var diff = desiredPos - (Vector2)GetOriginPoint();
+			var diff = desiredPos - GetOriginPoint();
 			var clampedDiff = Vector2.ClampMagnitude(diff, MaxGrabDistance);
 
-			return (Vector2)GetOriginPoint() + clampedDiff;
+			return GetOriginPoint() + clampedDiff;
 		}
 
 		private AnimationCurve GetLineWidthCurve()

@@ -509,10 +509,10 @@ MonoBehaviour:
   Root: {fileID: 4259183046190427184}
   IsBoss: 1
   BossTitle: Hungry Little Worm
-  ChaseSpeed: 99999
-  SinFrequency: 2
-  Damage: 1
-  Knockback: 6
+  ChaseSpeed: 100000000
+  SinFrequency: 4
+  Damage: 4
+  Knockback: 24
   Colliders: []
 --- !u!114 &2765049161453917260
 MonoBehaviour:

@@ -13,7 +13,11 @@ namespace Quinn.PlayerSystem
 		[SerializeField]
 		private float Distance = 0.5f;
 
+		[Space, SerializeField]
+		private bool SetDirectionManually;
+
 		private Grabber _grabber;
+		private Vector2 _manualDir;
 
 		private void Awake()
 		{
@@ -39,6 +43,11 @@ namespace Quinn.PlayerSystem
 		{
 			Vector2 dir = Pivot.position.DirectionTo(CrosshairManager.Instance.Position);
 
+			if (SetDirectionManually)
+			{
+				dir = _manualDir;
+			}
+
 			if (_grabber.IsGrabbing)
 			{
 				dir = Pivot.position.DirectionTo(_grabber.GrabPosition);
@@ -52,6 +61,14 @@ namespace Quinn.PlayerSystem
 			var scale = Staff.localScale;
 			scale.x = scale.y = Mathf.Sign(dir.x);
 			Staff.localScale = scale;
+		}
+
+		/// <summary>
+		/// Only works if <see cref="SetDirectionManually"/> is true.
+		/// </summary>
+		public void SetManualDirection(Vector2 dir)
+		{
+			_manualDir = dir.normalized;
 		}
 	}
 }

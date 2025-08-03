@@ -537,7 +537,7 @@ MonoBehaviour:
     Path: event:/Enemies/Grunt/Alert
   LeapThreshold: 4
   LeapForce: 24
-  LeapIdle: {x: 3, y: 4}
+  LeapIdle: {x: 1, y: 1.5}
   LeapSound:
     Guid:
       Data1: -444280744
@@ -546,8 +546,8 @@ MonoBehaviour:
       Data4: -1307670842
     Path: event:/Enemies/Grunt/Leap
   LeapHitboxDuration: 1
-  LeapDamage: 1
-  LeapKnockback: 8
+  LeapDamage: 3
+  LeapKnockback: 24
 --- !u!4 &1308594979820062192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4244023144394312299, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
