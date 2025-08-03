@@ -14,19 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_HasRenderer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_PreviousTrimEdge
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowShape2DProvider
-      value: 3389523914471243859
+      value: 3389523938012037121
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_PreviousEdgeProcessing
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_InitialTrim
@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[0].y
-      value: -9.985
+      value: -9.985001
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[1].x
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[1].y
-      value: 9.985
+      value: 9.984985
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[2].x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[2].y
-      value: 9.985
+      value: 9.984985
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[3].x
@@ -62,16 +62,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShapePath.Array.data[3].y
-      value: -9.985
+      value: -9.985001
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_PreviousShadowCastingSource
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_PreviousShadowShape2DSource
       value: 
-      objectReference: {fileID: 3368740376888234173}
+      objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: m_ShadowMesh.m_LocalBounds.m_Center.y
       value: 0
@@ -86,6 +86,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
       propertyPath: 'managedReferences[3389523914471243859]'
+      value: Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.ShadowShape2DProvider_SpriteRenderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922146449925019178, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
+      propertyPath: 'managedReferences[3389523938012037121]'
       value: Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.ShadowShape2DProvider_SpriteRenderer
       objectReference: {fileID: 0}
     - target: {fileID: 6973612854583236443, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
@@ -173,8 +177,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
---- !u!212 &3368740376888234173 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8118793980266670093, guid: e643b833ac0b61249b2b9fc2a4f6d211, type: 3}
-  m_PrefabInstance: {fileID: 6803790710319331504}
-  m_PrefabAsset: {fileID: 0}
