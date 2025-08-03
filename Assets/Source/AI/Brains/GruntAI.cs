@@ -70,7 +70,12 @@ namespace Quinn.AI.Brains
 
 			ShowBossUI();
 
+			yield return new WaitUntil(() => DstToPlayer < 4f || HealthNorm < 1f);
+
 			Audio.Play(AlertSound, transform.position);
+			FacePlayer();
+
+			yield return new WaitForSeconds(1f);
 			StartCoroutine(Chase());
 		}
 

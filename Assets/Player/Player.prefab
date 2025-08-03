@@ -929,7 +929,7 @@ MonoBehaviour:
   PunchRadius: 0.8
   PunchDamage: 10
   PunchKnockback: 32
-  PunchCooldown: 0.8
+  PunchCooldown: 2
   AdditionalPunchDistance: 1
   PunchSelfPush: 6
   GrabStartSound:

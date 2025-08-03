@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: Default
-      value: 62
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: FlashOnHurt
@@ -545,6 +545,9 @@ MonoBehaviour:
       Data3: 1808795062
       Data4: -1307670842
     Path: event:/Enemies/Grunt/Leap
+  LeapHitboxDuration: 1
+  LeapDamage: 1
+  LeapKnockback: 8
 --- !u!4 &1308594979820062192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4244023144394312299, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}

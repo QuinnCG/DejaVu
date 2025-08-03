@@ -66,7 +66,7 @@ namespace Quinn.PlayerSystem
 
 		private float _nextAllowedDashTime;
 		// Used for final sequence.
-		private bool _isInjured;
+		private bool IsInjured => Health.Current <= 2.1f;
 
 		private EventInstance _hurtSnapshot;
 
@@ -246,7 +246,7 @@ namespace Quinn.PlayerSystem
 		{
 			_animator.SetFloat("NormSpeed", _rb.linearVelocity.magnitude / AnimSpeedFactorMaxVel);
 			_animator.SetBool("IsMoving", _rb.linearVelocity.sqrMagnitude > 0f);
-			_animator.SetBool("IsInjured", _isInjured);
+			_animator.SetBool("IsInjured", IsInjured);
 		}
 
 		protected void Footstep_Anim()

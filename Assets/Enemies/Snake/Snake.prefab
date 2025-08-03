@@ -351,7 +351,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -463235185
   m_SortingLayer: -1
-  m_SortingOrder: 100
+  m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: 7463a35cdfda82442b6c66633ee99a06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.30588236}
   m_FlipX: 0
@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113610175383616674, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: Default
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8878458516625079171, guid: 9d9033d0d443b994e8610d8276f279bb, type: 3}
       propertyPath: m_Size.x
@@ -511,6 +511,8 @@ MonoBehaviour:
   BossTitle: Hungry Little Worm
   ChaseSpeed: 99999
   SinFrequency: 2
+  Damage: 1
+  Knockback: 6
   Colliders: []
 --- !u!114 &2765049161453917260
 MonoBehaviour:

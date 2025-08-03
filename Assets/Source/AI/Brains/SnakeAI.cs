@@ -1,4 +1,5 @@
 using Quinn.DamageSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace Quinn.AI.Brains
@@ -18,8 +19,12 @@ namespace Quinn.AI.Brains
 		[Space, SerializeField]
 		private Collider2D[] Colliders;
 
-		private void Start()
+		private IEnumerator Start()
 		{
+			DoesThink = false;
+			yield return new WaitUntil(() => DstToPlayer < 4f || HealthNorm < 1f);
+			DoesThink = true;
+
 			ShowBossUI();
 
 			foreach (var collider in Colliders)
