@@ -1,5 +1,7 @@
 using FMODUnity;
 using QFSW.QC;
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -28,7 +30,10 @@ namespace Quinn
 				Audio.Play(sound);
 			}
 
+#if UNITY_WEBGL
+			// Required, or the player won't be able to move.
 			SceneManager.LoadScene(0);
+#endif
 		}
 
 		[Command("quit", "Exit out of the game.")]

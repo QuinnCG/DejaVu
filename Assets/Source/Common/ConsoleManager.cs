@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using QFSW.QC;
@@ -24,6 +25,16 @@ namespace Quinn
 			Console.OnDeactivate += OnClose;
 
 			_cursorState = InputManager.Instance.GetCursorStateHandle(false);
+		}
+
+		private void Update()
+		{
+#if UNITY_EDITOR
+			if (Input.GetKeyDown(KeyCode.F12))
+			{
+				Capture_Cmd();
+			}
+#endif
 		}
 
 		private void OnOpen()
@@ -78,6 +89,13 @@ namespace Quinn
 		protected void Clear_Cmd()
 		{
 			Console.ClearConsole();
+		}
+
+		[Command("capture", "Takes a screenshot.")]
+		protected void Capture_Cmd()
+		{
+			Console.Deactivate();
+			ScreenCapture.CaptureScreenshot(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 		}
 	}
 }
