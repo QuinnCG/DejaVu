@@ -2,6 +2,7 @@ using Quinn.DamageSystem;
 using Quinn.PlayerSystem;
 using Quinn.UI;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Quinn.AI
@@ -46,6 +47,7 @@ namespace Quinn.AI
 			Rigidbody = GetComponent<Rigidbody2D>();
 			Health = GetComponent<Health>();
 
+			Health.OnDamage += OnDamaged;
 			Health.OnDeath += OnDeath;
 		}
 
@@ -79,6 +81,8 @@ namespace Quinn.AI
 		{
 			Rigidbody.linearDamping = drag;
 		}
+
+		protected virtual void OnDamaged(DamageInstance info) { }
 
 		protected virtual void OnDeath()
 		{

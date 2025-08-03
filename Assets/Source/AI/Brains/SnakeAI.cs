@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Quinn.DamageSystem;
 using System.Collections;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Quinn.AI.Brains
 
 		[Space, SerializeField]
 		private Collider2D[] Colliders;
+
+		private bool _doneBigAttack;
 
 		private IEnumerator Start()
 		{
@@ -56,6 +59,26 @@ namespace Quinn.AI.Brains
 
 			Push(ChaseSpeed * Time.deltaTime * dir);
 			FacePlayer();
+		}
+
+		protected override void OnDamaged(DamageInstance info)
+		{
+			if (HealthNorm < 0.4f && !_doneBigAttack)
+			{
+				_doneBigAttack = true;
+				Rigidbody.linearVelocity = Vector2.zero;
+				StartCoroutine(BigAttack());
+			}
+		}
+
+		private IEnumerator BigAttack()
+		{
+			yield return transform.DOMove(PlayerPos, 0.5f).SetEase(Ease.OutCubic);
+
+			var pHealth = Player.Health;
+			ApplyDamage(pHealth, Mathf.Max(0f, pHealth.Current - 1f), DirToPlayerCenter * 32f);
+
+			Player.SetSpritesRed();
 		}
 	}
 }

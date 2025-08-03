@@ -1,3 +1,4 @@
+using DG.Tweening;
 using FMOD.Studio;
 using FMODUnity;
 using QFSW.QC;
@@ -60,6 +61,10 @@ namespace Quinn.PlayerSystem
 
 		[SerializeField, Required]
 		private Transform RootSprite;
+		[SerializeField]
+		private SpriteRenderer[] Sprites;
+		[SerializeField]
+		private SpriteRenderer Hat;
 
 		[SerializeField, FoldoutGroup("SFX")]
 		private EventReference Footstep, HurtSnapshot;
@@ -149,6 +154,17 @@ namespace Quinn.PlayerSystem
 		{
 			_hurtSnapshot.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 			_hurtSnapshot.release();
+		}
+
+		public void SetSpritesRed()
+		{
+			foreach (var sprite in Sprites)
+			{
+				sprite.DOColor(Color.red, UnityEngine.Random.Range(5f, 10f));
+			}
+
+			Hat.DOFade(0f, 5f)
+				.OnComplete(() => Hat.enabled = false);
 		}
 
 		private void OnDamaged(DamageInstance instance)
